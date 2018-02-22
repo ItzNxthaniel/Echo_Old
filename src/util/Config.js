@@ -2,6 +2,11 @@
 module.exports = {
   prefix: "e$",
   dPrefix: "e#",
+  maintenance: true,
+  buildVersion: {
+    number: "v2",
+    name: "`Woah`"
+  },
   files: {
     commands: "./commands",
     events: "./events"
@@ -43,7 +48,15 @@ module.exports = {
       "YA NEED HELP?",
       /* Fiery_Hacker */
       "Bringing in the reinforcements..."
-    ]
+    ],
+    fixed: {
+      false: "False",
+      true: "True",
+      online: "Online",
+      dnd: "Do Not Disturb",
+      idle: "Idle",
+      offline: "Offline"
+    }
   },
   colors: {
     orange: "#F4862C",
