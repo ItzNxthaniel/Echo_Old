@@ -1,12 +1,12 @@
 /* Variables */
 const { Client, Collection } = require("discord.js");
 const { DBManager } = require("../database/DBManager.js");
-const { files } = require("../util/Config.js");
+const { files, maintenance } = require("../util/Config.js");
 const fs = require("fs");
 const klaw = require("klaw");
 const moment = require("moment-timezone");
 const path = require("path");
-const { token } = require("../util/Tokens.js");
+const { token, devToken } = require("../util/Tokens.js");
 
 class Echo extends Client {
   constructor() {
@@ -22,7 +22,7 @@ class Echo extends Client {
 
     this.dbm.connect();
     this.debug(`Logging in...`);
-    this.login(token);
+    this.login(maintenance ? devToken : token);
   }
   debug(...args) {
     const date = moment();
