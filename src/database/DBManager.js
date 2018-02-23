@@ -112,7 +112,7 @@ class DBManager {
     if (!this.db) throw new Error('Database Not Ready');
     const guild = this.client.guilds.get(g);
     if (!guild) throw new Error('Client Cannot Find Guild');
-    const gCollection = this.db.collection(this.client.config.mongodb.collections.servers);
+    const gCollection = this.db.collection(this.client.config.mongodb.collections.guilds);
     if (!gCollection) throw new Error('Guild Database Missing');
     await gCollection.deleteMany({ g });
     const gData = new DefaultServer(g);
@@ -136,7 +136,7 @@ class DBManager {
 
   async fetchGuildData(g) {
     if (!this.db) throw new Error('Database Not Ready');
-    const gCollection = await this.getCollection(this.client.config.mongodb.collections.servers);
+    const gCollection = await this.getCollection(this.client.config.mongodb.collections.guilds);
     if (!gCollection) throw new Error('Guild or Donations Collection Missing');
     let gData = await gCollection.findOne({ g_id: g });
     if (!this.client.config.IsBeta && !gData) gData = await this.makeNewGuild(g, true);
@@ -147,7 +147,7 @@ class DBManager {
 
   async fetchUserData(u) {
     if (!this.db) throw new Error('Database Not Ready');
-    const uCollection = await this.getCollection(this.client.config.mongodb.collections.users);
+    const uCollection = await this.getCollection(this.client.config.mongodb.collections.afk);
     if (!uCollection ) throw new Error('User Collection Missing');
     let uData = await uCollection.findOne({ u_id: u });
     if (!uData) return null;
