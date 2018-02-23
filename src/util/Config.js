@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 module.exports = {
-  prefix: "e$",
-  dPrefix: "e#",
+  prefix: "e#",
   maintenance: true,
   buildVersion: {
     number: "v2",
