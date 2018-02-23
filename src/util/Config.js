@@ -9,11 +9,12 @@ module.exports = {
   },
   files: {
     commands: "./commands",
-    events: "./events"
+    events: "./events",
+    logs: "./logs"
   },
   mdb: {
     blacklist: "blacklist",
-    // donations: 'donations',
+    donations: "donations",
     guilds: "guilds",
     afk: "afk"
   },
