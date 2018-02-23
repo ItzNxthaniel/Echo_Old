@@ -9,7 +9,11 @@
  * @type {string}
  */
 exports.token = "";
-exports.devToken = "";
+
+exports.gOpts = {
+  maxResults: null,
+  key: ""
+};
 
 /**
  * MongoDB Login Information
