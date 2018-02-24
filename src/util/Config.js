@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 module.exports = {
   messages: {
-    prefix: "e#$"
+    prefix: "ei$"
   },
   maintenance: true,
   buildVersion: {
