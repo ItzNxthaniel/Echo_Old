@@ -5,7 +5,7 @@ const Command = require("../../structures/Command.js");
 class Restart extends Command {
   constructor(client, path) {
     super(client, path, {
-      name: "Restart",
+      name: "restart",
       desc: "Only Runnable by Bot Owner"
     });
   }
