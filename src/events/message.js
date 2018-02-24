@@ -15,7 +15,7 @@ class Message extends Event {
         m.guildData = null;
       }
     }
-    m.prefix = !m.server || m.guildData.settings.prefix == "default" ? messages.prefix : m.guildData.settings.prefix;
+    m.prefix = !m.guildData || m.guildData.settings.prefix == "default" ? messages.prefix : m.guildData.settings.prefix;
     const mreg = new RegExp(`^<@!?${this.client.user.id}>`);
     if (mreg.test(m.content)) {
       m.content = m.prefix + m.content.replace(mreg, "").replace(" ", "");
