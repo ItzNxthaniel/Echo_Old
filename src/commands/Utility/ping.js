@@ -28,7 +28,7 @@ class Ping extends Command {
       }
     }
     str += `Average Ping: ${avg.toFixed(0)} milliseconds.`;
-    this.end(false, m.channel);
+    this.typing(false, m.channel);
     return m.channel.send(str);
   }
 }
