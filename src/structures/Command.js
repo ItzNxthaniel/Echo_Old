@@ -6,11 +6,9 @@ class Command {
     this.name = name;
     this.path = path;
   }
-  start(channel) {
-    return channel.startTyping();
-  }
-  end(channel) {
-    return channel.stopTyping(true);
+  typing(p, channel) {
+    if (p) return channel.startTyping();
+    if (!p) return channel.stopTyping(true);
   }
 }
 

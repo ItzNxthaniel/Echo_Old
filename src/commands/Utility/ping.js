@@ -8,7 +8,7 @@ class Ping extends Command {
     });
   }
   async execute(m) {
-    this.start(m.channel);
+    this.typing(true, m.channel);
     let p;
     try {
       if (!this.client.getAllShardsAvailable()) throw new Error();
@@ -28,7 +28,7 @@ class Ping extends Command {
       }
     }
     str += `Average Ping: ${avg.toFixed(0)} milliseconds.`;
-    this.end(m.channel);
+    this.end(false, m.channel);
     return m.channel.send(str);
   }
 }
