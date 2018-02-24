@@ -1,5 +1,6 @@
 const Command = require("../../structures/Command.js");
-const file = require("../../util/Restart.js");
+// const files = require("../../util/Restart.json");
+// const fs = require("fs");
 
 class Restart extends Command {
   constructor(client, path) {
@@ -8,9 +9,11 @@ class Restart extends Command {
       desc: "Only Runnable by Bot Owner"
     });
   }
-  async execute(m) {
+  execute(m) {
+    if (!m.isOwner) return m.errors.notBotOwner();
     this.typing(true, m.channel);
-
+    m.errors.inDev();
+    return this.typing(false, m.channel);
   }
 }
 

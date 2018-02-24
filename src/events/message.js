@@ -54,6 +54,7 @@ class Message extends Event {
     m.command = m.argsLower[0].substring(m.prefix.length, m.argsLower[0].length);
     /* eslint-disable max-len */
     m.errors = {
+      inDev: function inDev() { return m.channel.send(":hammer_pick: This command is currently under development!"); },
       noDMSupport: function noDMSupport() { return m.channel.send(":warning: This command does not support Direct Messages."); },
       notBotOwner: function notBotOwner() { return m.channel.send(":no_entry_sign: You're not a bot owner. You do not have permission to use this command."); },
       cantEmbedLinks: function cantEmbedLinks() { return m.channel.send(":link: This command won't run because the following permissions are missing: `Embed Links`"); },
