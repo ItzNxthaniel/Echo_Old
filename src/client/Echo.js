@@ -19,6 +19,10 @@ class Echo extends Client {
 
     this.addcommands();
     this.addevents();
+    this.on("messageUpdate", (oM, nM) => {
+      if (nM.createdAt.getTime() < ((new Date()).getTime() - 60000)) return;
+      this.emit("message", nM);
+    });
 
     this.dbm.connect();
     this.debug(`Logging in...`);
