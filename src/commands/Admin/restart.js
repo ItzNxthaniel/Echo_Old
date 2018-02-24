@@ -1,6 +1,5 @@
 const Command = require("../../structures/Command.js");
-// const files = require("../../util/Restart.json");
-// const fs = require("fs");
+const fs = require("fs");
 
 class Restart extends Command {
   constructor(client, path) {
@@ -12,8 +11,17 @@ class Restart extends Command {
   execute(m) {
     if (!m.isOwner) return m.errors.notBotOwner();
     this.typing(true, m.channel);
-    m.errors.inDev();
-    return this.typing(false, m.channel);
+    m.channel.send("Welcome back sir, Catching the File for you!").then(snt => {
+      const file = require("../../util/Restart.json");
+      const json = fs.readFileSync(file);
+      let restart = JSON.parse(json);
+      restart = m.channel.id;
+      fs.writeFileSync(file, JSON.stringify(restart, null, 3));
+      snt.edit(":warning: Restarting my system!").then(() => {
+        this.typing(false, m.channel);
+        process.exit();
+      });
+    });
   }
 }
 
