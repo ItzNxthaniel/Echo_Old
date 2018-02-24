@@ -126,7 +126,7 @@ class DBManager {
     if (!this.db) throw new Error("Database Not Ready");
     const user = this.client.users.get(u);
     if (!user) throw new Error("Client Cannot Find User");
-    const uCollection = this.db.collection(this.client.config.mongodb.collections.users);
+    const uCollection = this.db.collection(this.client.config.mongodb.collections.afk);
     if (!uCollection) throw new Error('User Database Missing');
     await uCollection.deleteMany({ u });
     const uData = new DefaultServer(u);
