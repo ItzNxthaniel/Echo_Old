@@ -12,7 +12,7 @@ class Ready extends Event {
     if (restart != "") {
       this.client.channels.get(restart).send(`My gears are running!\n **[CONSOLE]:** Ready on ${this.client.guilds.size} guilds`);
       restart = "";
-      fs.writeFileSync("./../util/Restart.json", JSON.stringify(restart, null, 3));
+      fs.writeFileSync("./util/Restart.json", JSON.stringify(restart, null, 3));
     }
     this.client.debug(`Online and ready! Currently on ` +
     `${this.client.guilds.size} guild${this.client.guilds.size == 1 ? "" : "s"}.`);
