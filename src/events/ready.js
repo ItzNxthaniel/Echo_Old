@@ -1,14 +1,15 @@
 const Event = require("../structures/Event.js");
 const { messages } = require("../util/Config.js");
 const fs = require("fs");
-const json = fs.readFileSync("./util/Restart.json");
-let restart = JSON.parse(json);
+
 
 class Ready extends Event {
   constructor(client, path) {
     super(client, path, { event: "ready" });
   }
   execute() {
+    const json = fs.readFileSync("./util/Restart.json");
+    let restart = JSON.parse(json);
     if (restart != "") {
       this.client.channels.get(restart).send(`My gears are running!\n **[CONSOLE]:** Ready on ${this.client.guilds.size} guilds`);
       restart = "";
