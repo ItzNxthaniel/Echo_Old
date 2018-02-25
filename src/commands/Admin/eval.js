@@ -10,7 +10,11 @@ class Eval extends Command {
   execute(m) {
     if (!m.isOwner) return m.errors.notBotOwner();
     this.typing(true, m.channel);
-    const val = this.client.getAllArguments([m.args[0]], m.contet);
+    const val = this.client.getAllArguments([m.args[0]], m.content);
+    if (!val) {
+      this.typing(false, m.channel);
+      return m.channel.send("Whoops, looks like you didn't supply anything!");
+    }
     try {
       this.typing(false, m.channel);
       return m.channel.send(`\`\`\`js\n${eval(val)}\n\`\`\``);
