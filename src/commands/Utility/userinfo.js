@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 const ce = require("embed-creator");
-const Command = require("../../../structures/Command.js");
-const { colors } = require("../../../util/Config.js");
+const Command = require("../../structures/Command.js");
+const { colors } = require("../../util/Config.js");
 const moment = require("moment-timezone");
 
 function capFirstLetter(string) {
