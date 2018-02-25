@@ -28,7 +28,7 @@ class Information {
 class UserInfo extends Command {
   constructor(client, path) {
     super(client, path, {
-      name: "USER_INFO",
+      name: "userinfo",
       desc: "Gives information about a selected user!",
       aliases: "userstats"
     });
