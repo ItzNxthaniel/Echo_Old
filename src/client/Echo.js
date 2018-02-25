@@ -42,6 +42,10 @@ class Echo extends Client {
       // ...
     });
   }
+  warn(...args) {
+    const date = moment();
+    console.log(`\x1b[36m[${date.format("HH:MM:SS")}]`, `[Shard ${this.shard.id}]`, `\x1b[33m`, ...args);
+  }
   log(string) {
     return new Promise((resolve, reject) => {
       fs.open(`${files.logs}/Log_${moment().format("MM-DD-YYYY")}.log`, "a", (err1, fd) => {
@@ -99,7 +103,7 @@ class Echo extends Client {
   getCommand(name) {
     if (this.commands.has(name)) return this.commands.get(name);
     this.commands.forEach(c => { if (c.aliases && c.aliases.includes(name)) return c; });
-    return null;
+    return this.warn(`Unknown FileName [${name}]`);
   }
   getAllArguments(args, text) {
     return text.substring(args.map(a => a.length + 1).reduce((a, b) => a + b, 0), text.length);
