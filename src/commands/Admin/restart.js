@@ -11,15 +11,13 @@ class Restart extends Command {
   execute(m) {
     if (!m.isOwner) return m.errors.notBotOwner();
     this.typing(true, m.channel);
-    m.channel.send("Welcome back sir, Catching the File for you!").then(snt => {
-      const json = fs.readFileSync("./../../util/Restart.json");
-      let restart = JSON.parse(json);
-      restart = m.channel.id;
-      fs.writeFileSync("../../util/Restart.json", JSON.stringify(restart, null, 3));
-      snt.edit(":warning: Restarting my system!").then(() => {
-        this.typing(false, m.channel);
-        process.exit();
-      });
+    const json = fs.readFileSync("././util/Restart.json");
+    let restart = JSON.parse(json);
+    restart = m.channel.id;
+    fs.writeFileSync("././util/Restart.json", JSON.stringify(restart, null, 3));
+    m.channel.send(":warning: Restarting my system!").then(() => {
+      this.typing(false, m.channel);
+      process.exit();
     });
   }
 }

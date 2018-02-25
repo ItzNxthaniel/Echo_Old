@@ -101,7 +101,7 @@ class Message extends Event {
     try {
       await Promise.resolve(command.execute(m));
     } catch (e) {
-      command.end(m.channel);
+      command.typing(false, m.channel);
       return m.errors.internalError(e);
     }
   }

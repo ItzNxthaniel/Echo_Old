@@ -1,7 +1,7 @@
 const Event = require("../structures/Event.js");
 const { messages } = require("../util/Config.js");
 const fs = require("fs");
-const json = fs.readFileSync("./../util/Restart.json");
+const json = fs.readFileSync("./util/Restart.json");
 let restart = JSON.parse(json);
 
 class Ready extends Event {
