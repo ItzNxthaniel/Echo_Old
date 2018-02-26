@@ -63,7 +63,8 @@ module.exports = {
   colors: {
     orange: "#F4862C",
     red: "#F2524A",
-    green: "#92EE8F"
+    green: "#92EE8F",
+    blue: "#7289DA"
   },
   owners: ["147891648628654082"]
 };
