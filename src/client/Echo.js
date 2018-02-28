@@ -100,6 +100,7 @@ class Echo extends Client {
     const vCount = await this.shard.fetchClientValues(clientValue);
     return vCount.reduce((a, b) => a + b, 0);
   }
+  /* eslint-disable brace-style */
   getCommand(name) {
     if (this.commands.has(name)) return this.commands.get(name);
     this.commands.forEach(c => { if (c.aliases && c.aliases.includes(name)) return c; });
