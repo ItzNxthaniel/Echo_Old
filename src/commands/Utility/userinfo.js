@@ -30,7 +30,7 @@ class UserInfo extends Command {
     super(client, path, {
       name: "userinfo",
       desc: "Gives information about a selected user!",
-      aliases: "userstats"
+      aliases: ["userstats"]
     });
   }
   execute(m) {
