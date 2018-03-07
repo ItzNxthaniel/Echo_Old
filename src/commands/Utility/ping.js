@@ -22,11 +22,14 @@ class Ping extends Command {
     let str = "";
     for (let i = 0; i < this.client.shard.count; i++) {
       if (p[i]) {
-        str += `Shard ${i}: ${p[i].toFixed(0)} milliseconds.\n`;
+        // const t1 = await this.translate("german", `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`);
+        str += `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`;
       } else {
+        // const unfound = await this.translate("german", `Shard ${i}: Unavailable.`);
         str += `Shard ${i}: Unavailable.\n`;
       }
     }
+    // const a = await this.translate("german", `Average Ping: ${avg.toFixed(0)} milliseconds.`);
     str += `Average Ping: ${avg.toFixed(0)} milliseconds.`;
     this.typing(false, m.channel);
     return m.channel.send(str);

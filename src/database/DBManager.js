@@ -24,6 +24,7 @@ class DefaultServer {
       bans: []
     };
     this.settings = {
+      lang: "english",
       notifications: false,
       preferEmbeds: false,
       noInvite: "",

@@ -1,8 +1,10 @@
 /* eslint-disable prefer-arrow-callback */
 /* eslint-disable func-names */
-const { langCodes } = require("../util/Config.js").lang;
+const { promisify } = require("util");
 const { key } = require("../util/Tokens.js").gOpts;
 const gTrans = require("google-translate")(key);
+const translatePromise = promisify(gTrans.translate);
+const { langCodes } = require("../util/Config.js").lang;
 
 class Command {
   constructor(client, path, { aliases, desc, name }) {
@@ -12,12 +14,10 @@ class Command {
     this.name = name;
     this.path = path;
   }
-  translate(lng, msg) {
+  async translate(lng, msg) {
     const lngCode = langCodes[lng];
-    gTrans.translate(msg, lngCode, function(err, r) {
-      if (err) return console.error(err);
-      return r.translatedText;
-    });
+    const r = await translatePromise(msg, lngCode);
+    return r.translatedText;
   }
   typing(p, channel) {
     if (p) return channel.startTyping();
