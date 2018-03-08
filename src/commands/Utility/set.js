@@ -9,7 +9,7 @@ class Set extends Command {
       desc: "Allows you to customize settings on your server!"
     });
   }
-  execute(m) {
+  async execute(m) {
     this.typing(true, m.channel);
     const f = m.argsLower[1];
     const guilds = this.client.dbm.collection(this.client.config.mdb.guilds);
@@ -49,14 +49,14 @@ class Set extends Command {
         m.channel.send(`Alright, I've set this server's prefix to, \`e$\`, if there were captialized characters I went ahead and lowered them!`);
       }
     } else if (["lang", "l"].includes(f)) {
-      if (!m.isGuildOwner && !m.isOwner) {
+      if (m.guild.owner.id != m.author.id && !m.isOwner) {
         this.typing(false, m.channel);
         return m.errors.notGuildOwner();
       }
       const s = m.argsLower[2];
       if (!s) {
         this.typing(false, m.channel);
-        return m.reply("You need to supply a language");
+        return m.reply(await this.translate(m.guildData.settings.lang, "You need to supply a language"));
       }
 
       if (!langCodes[s]) {
@@ -67,7 +67,9 @@ class Set extends Command {
       m.guildData.settings.lang = s;
       guilds.update({ g_id: m.guild.id }, m.guildData);
       this.typing(false, m.channel);
-      m.channel.send(`Alright, I've set this server's default language to, \`${s}\`, please notice we use Google Translate API V3 to make this possible! We all know Google Translate isn't the best.`);
+      const fp = await this.translate(m.guildData.settings.lang, "Alright, I've set this server's default language to");
+      const sp = await this.translate(m.guildData.settings.lang, "please notice we use Google Translate API V3 to make this possible! We all know Google Translate isn't the best.");
+      m.channel.send(`${fp} \`${s}\` ${sp}`);
     }
   }
 }
