@@ -25,7 +25,7 @@ class Ping extends Command {
         // const t1 = await this.translate("german", `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`);
         str += `Shard ${i}: ${p[i].toFixed(0)} milliseconds.\n`;
       } else {
-        // const unfound = await this.translate("german", `Shard ${i}: Unavailable.`);
+        // const unfound = await this.translate("german", `Shard ${i}: Unavailable.\n`);
         str += `Shard ${i}: Unavailable.\n`;
       }
     }
