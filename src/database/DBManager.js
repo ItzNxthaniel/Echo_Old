@@ -161,10 +161,6 @@ class DBManager {
     return gData;
   }
 
-  collection(name) {
-    return this.db.collection(name);
-  }
-
   /*
   async fetchUserData(u) {
     if (!this.db) throw new Error('Database Not Ready');
@@ -175,6 +171,7 @@ class DBManager {
     return uData;
   }
   */
+
   collection(name) {
     return this.db.collection(name);
   }

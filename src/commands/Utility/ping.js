@@ -22,15 +22,18 @@ class Ping extends Command {
     let str = "";
     for (let i = 0; i < this.client.shard.count; i++) {
       if (p[i]) {
-        // const t1 = await this.translate("german", `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`);
-        str += `Shard ${i}: ${p[i].toFixed(0)} milliseconds.\n`;
+        const tShard = await this.translate(m.guildData.settings.lang, `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`);
+        const stringToUse = m.guildData.settings.lang != "english" ? tShard : `Shard ${i}: ${p[i].toFixed(0)} milliseconds.`;
+        str += `${stringToUse}\n`;
       } else {
-        // const unfound = await this.translate("german", `Shard ${i}: Unavailable.\n`);
-        str += `Shard ${i}: Unavailable.\n`;
+        const unfound = await this.translate(m.guildData.settings.lang, `Shard ${i}: Unavailable.\n`);
+        const stringToUse = m.guildData.settings.lang != "english" ? unfound : `Shard ${i}: Unavailable.`;
+        str += `${stringToUse}\n`;
       }
     }
-    // const a = await this.translate("german", `Average Ping: ${avg.toFixed(0)} milliseconds.`);
-    str += `Average Ping: ${avg.toFixed(0)} milliseconds.`;
+    const aP = await this.translate(m.guildData.settings.lang, `Average Ping: ${avg.toFixed(0)} milliseconds.`);
+    const string2Use = m.guildData.settings.lang != "english" ? aP : `Average Ping: ${avg.toFixed(0)} milliseconds.`;
+    str += string2Use;
     this.typing(false, m.channel);
     return m.channel.send(str);
   }

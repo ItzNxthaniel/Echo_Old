@@ -47,14 +47,18 @@ class Message extends Event {
         // ...
       }
     }
-    if (!m.content.startsWith(m.prefix)) return;
+    if (m.guildData.settings.prefix != "default" && m.content.startsWith(messages.prefix)) {
+      return m.channel.send(`The prefix for **${m.guild.name}** is currently \`${m.guildData.settings.prefix}\``);
+    } else if (!m.content.startsWith(m.prefix)) { return; }
     m.isOwner = owners.includes(m.author.id);
+    m.isGuildOwner = m.guild.owner.id == m.author.id;
     m.args = m.content.split(" ");
     m.argsLower = m.content.toLowerCase().split(" ");
     m.command = m.argsLower[0].substring(m.prefix.length, m.argsLower[0].length);
     /* eslint-disable max-len */
     m.errors = {
       inDev: function inDev() { return m.channel.send(":hammer_pick: This command is currently under development!"); },
+      notGuildOwner: function notGuildOwner() { return m.channel.send(":x: You're not the guild owner. You do not have permission to change this setting!"); },
       noDMSupport: function noDMSupport() { return m.channel.send(":warning: This command does not support Direct Messages."); },
       notBotOwner: function notBotOwner() { return m.channel.send(":no_entry_sign: You're not a bot owner. You do not have permission to use this command."); },
       cantEmbedLinks: function cantEmbedLinks() { return m.channel.send(":link: This command won't run because the following permissions are missing: `Embed Links`"); },
@@ -89,7 +93,7 @@ class Message extends Event {
     } catch (e) {
       // ...
     }
-    const command = this.client.getCommand(m.command);
+    const command = await this.client.getCommand(m.command);
     if (!command) return;
     if (!m.isDM) {
       this.client.debug(`User ${m.author.username} (${m.author.id}) issued server command ` +
