@@ -137,7 +137,7 @@ class DBManager {
 
   async fetchGuildData(g) {
     if (!this.db) throw new Error('Database Not Ready');
-    const gCollection = await this.getCollection(this.client.config.mongodb.collections.guilds);
+    const gCollection = await this.collection(this.client.config.mongodb.collections.guilds);
     if (!gCollection) throw new Error('Guild or Donations Collection Missing');
     let gData = await gCollection.findOne({ g_id: g });
     if (!this.client.config.IsBeta && !gData) gData = await this.makeNewGuild(g, true);
@@ -148,7 +148,7 @@ class DBManager {
 
   async fetchUserData(u) {
     if (!this.db) throw new Error('Database Not Ready');
-    const uCollection = await this.getCollection(this.client.config.mongodb.collections.afk);
+    const uCollection = await this.collection(this.client.config.mongodb.collections.afk);
     if (!uCollection ) throw new Error('User Collection Missing');
     let uData = await uCollection.findOne({ u_id: u });
     if (!uData) return null;
