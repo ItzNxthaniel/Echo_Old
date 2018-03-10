@@ -15,7 +15,8 @@ class Set extends Command {
     const guilds = this.client.dbm.collection(this.client.config.mdb.guilds);
     if (!f) {
       this.typing(false, m.channel);
-      return m.reply("Current changeable settings,\n \n`prefix <prefix wanted/off>`\n`lang <language>`");
+      const fp = await this.translate(m.guildData.settings.lang, "Current changeable settings");
+      return m.reply(`${fp},\n \`prefix <prefix wanted/off>\`\n\`lang <language>\``);
     }
     if (["prefix", "p"].includes(f)) {
       if (!m.isGuildOwner && !m.isOwner) {
@@ -25,11 +26,11 @@ class Set extends Command {
       let s = m.argsLower[2];
       if (!s) {
         this.typing(false, m.channel);
-        return m.reply("You need to supply a prefix!");
+        return m.reply(await this.translate(m.guildData.settings.lang, "You need to supply a prefix!"));
       }
       if (m.guildData.settings.prefix == s && s != "off") {
         this.typing(false, m.channel);
-        return m.reply("You already have the prefix set to this!");
+        return m.reply(await this.translate(m.guildData.settings.lang, "You already have the prefix set to this!"));
       }
       if (s != "off") {
         if (s == "e$") s = "default";
@@ -37,19 +38,23 @@ class Set extends Command {
         m.guildData.settings.prefix = s;
         guilds.update({ g_id: m.guild.id }, m.guildData);
         this.typing(false, m.channel);
-        m.channel.send(`Alright, I've set this server's prefix to, \`${s}\`, if there were captialized characters I went ahead and lowered them!`);
+        const fp = await this.translate(m.guildData.settings.lang, "Alright, I've set this server's prefix to");
+        const sp = await this.translate(m.guildData.settings.lang, "if there were captialized characters I went ahead and lowered them!");
+        m.channel.send(`${fp} \`${s}\` ${sp}`);
       } else {
         if (m.guildData.settings.prefix == "default") {
           this.typing(false, m.channel);
-          return m.reply("You already have the prefix set to this!");
+          return m.reply(await this.translate(m.guildData.settings.lang, "You already have the prefix set to this!"));
         }
         m.guildData.settings.prefix = "default";
         guilds.update({ g_id: m.guild.id }, m.guildData);
         this.typing(false, m.channel);
-        m.channel.send(`Alright, I've set this server's prefix to, \`e$\`, if there were captialized characters I went ahead and lowered them!`);
+        const fp = await this.translate(m.guildData.settings.lang, "Alright, I've set this server's prefix to");
+        const sp = await this.translate(m.guildData.settings.lang, "if there were captialized characters I went ahead and lowered them!");
+        m.channel.send(`${fp} \`e$\` ${sp}`);
       }
     } else if (["lang", "l"].includes(f)) {
-      if (m.guild.owner.id != m.author.id && !m.isOwner) {
+      if (!m.isGuildOwner && !m.isOwner) {
         this.typing(false, m.channel);
         return m.errors.notGuildOwner();
       }
@@ -61,7 +66,7 @@ class Set extends Command {
 
       if (!langCodes[s]) {
         this.typing(false, m.channel);
-        return m.reply("Sorry but currently the language you entered is not supported!");
+        return m.reply(this.translate(m.guildData.settings.lang, "Sorry, but currently the language you entered is not supported!"));
       }
 
       m.guildData.settings.lang = s;
