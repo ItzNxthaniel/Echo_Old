@@ -16,7 +16,7 @@ class Set extends Command {
     if (!f) {
       this.typing(false, m.channel);
       const fp = await this.translate(m.guildData.settings.lang, "Current changeable settings");
-      return m.reply(`${fp},\n \`prefix <prefix wanted/off>\`\n\`lang <language>\``);
+      return m.reply(`${fp},\n \`prefix <prefix wanted/off>\`\n\`lang <language>\`\n\`action-log <#channelName wanted/off>\`\n\`member-log <#channelName wanted/off>\``);
     }
     if (["prefix", "p"].includes(f)) {
       if (!m.isGuildOwner && !m.isOwner) {
@@ -38,7 +38,7 @@ class Set extends Command {
         m.guildData.settings.prefix = s;
         guilds.update({ g_id: m.guild.id }, m.guildData);
         this.typing(false, m.channel);
-        const fp = await this.translate(m.guildData.settings.lang, "Alright, I've set this server's prefix to");
+        const fp = await this.translate(m.guildData.settings.lang, "Alright I've set this server's prefix to");
         const sp = await this.translate(m.guildData.settings.lang, "if there were captialized characters I went ahead and lowered them!");
         m.channel.send(`${fp} \`${s}\` ${sp}`);
       } else {
@@ -75,6 +75,76 @@ class Set extends Command {
       const fp = await this.translate(m.guildData.settings.lang, "Alright, I've set this server's default language to");
       const sp = await this.translate(m.guildData.settings.lang, "please notice we use Google Translate API V3 to make this possible! We all know Google Translate isn't the best.");
       m.channel.send(`${fp} \`${s}\` ${sp}`);
+    } else if (["action-log", "al"].includes(f)) {
+      if (!m.isGuildOwner && !m.isOwner) {
+        this.typing(false, m.channel);
+        return m.errors.notGuildOwner();
+      }
+
+      const s = m.argsLower[2];
+
+      if (!s || s == "off") {
+        m.guildData.settings.logs.action = "";
+        guilds.update({ g_id: m.guild.id }, m.guildData);
+        this.typing(false, m.channel);
+        return m.channel.send(await this.translate(m.guildData.settings.lang, "Alright I've reset this server's action-log"));
+      }
+
+      if (m.mentions.channels.size == 0) {
+        this.typing(false, m.channel);
+        return m.reply("you need to mention a channel!");
+      }
+
+      const channelID = m.mentions.channels.first().id;
+      if (!m.guild.channels.get(channelID)) {
+        this.typing(false, m.channel);
+        return m.channel.send("The channel needs to be in this server!");
+      }
+      if (m.guildData.settings.logs.action == s) {
+        this.typing(false, m.channel);
+        return m.reply(await this.translate(m.guildData.settings.lang, "You already have the action-log set to this!"));
+      }
+
+      m.guildData.settings.logs.action = s;
+      guilds.update({ g_id: m.guild.id }, m.guildData);
+      this.typing(false, m.channel);
+      const tMsg = await this.translate(m.guildData.settings.lang, "Alright I've set this server's action-log to");
+      m.channel.send(`${tMsg} \`${s}\``);
+    } else if (["member-log", "ml"].includes(f)) {
+      if (!m.isGuildOwner && !m.isOwner) {
+        this.typing(false, m.channel);
+        return m.errors.notGuildOwner();
+      }
+
+      const s = m.argsLower[2];
+
+      if (!s || s == "off") {
+        m.guildData.settings.logs.member = "";
+        guilds.update({ g_id: m.guild.id }, m.guildData);
+        this.typing(false, m.channel);
+        return m.channel.send(await this.translate(m.guildData.settings.lang, "Alright I've reset this server's member-log"));
+      }
+
+      if (m.mentions.channels.size == 0) {
+        this.typing(false, m.channel);
+        return m.reply("you need to mention a channel!");
+      }
+
+      const channelID = m.mentions.channels.first().id;
+      if (!m.guild.channels.get(channelID)) {
+        this.typing(false, m.channel);
+        return m.channel.send("The channel needs to be in this server!");
+      }
+      if (m.guildData.settings.logs.member == s) {
+        this.typing(false, m.channel);
+        return m.reply(await this.translate(m.guildData.settings.lang, "You already have the member-log set to this!"));
+      }
+
+      m.guildData.settings.logs.member = s;
+      guilds.update({ g_id: m.guild.id }, m.guildData);
+      this.typing(false, m.channel);
+      const tMsg = await this.translate(m.guildData.settings.lang, "Alright I've set this server's member-log to");
+      m.channel.send(`${tMsg} \`${s}\``);
     }
   }
 }
