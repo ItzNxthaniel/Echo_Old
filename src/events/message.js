@@ -1,6 +1,6 @@
 const Event = require("../structures/Event.js");
 const { mdb, messages, owners } = require("../util/Config.js");
-const Command = require("../structures/Command.js");
+// const Command = require("../structures/Command.js");
 
 class Message extends Event {
   constructor(client, path) {
@@ -57,24 +57,24 @@ class Message extends Event {
     m.argsLower = m.content.toLowerCase().split(" ");
     m.command = m.argsLower[0].substring(m.prefix.length, m.argsLower[0].length);
     /* eslint-disable max-len */
-    const iD = await Command.translate(m.guildData.settings.lang, "This command is currently under development!");
-    const nGO = await Command.translate(m.guildData.settings.lang, "You're not the guild owner. You do not have permission to change this setting!");
-    const nDMS = await Command.translate(m.guildData.settings.lang, "This command does not support Direct Messages.");
-    const nBO = await Command.translate(m.guildData.settings.lang, "You're not a bot owner. You do not have permission to use this command.");
-    const cELf = await Command.translate(m.guildData.settings.lang, "This command won't run because the following permissions are missing");
-    const cELs = await Command.translate(m.guildData.settings.lang, "Embed Links");
-    const dU = await Command.translate(m.guildData.settings.lang, "This command has failed to run as the database is currently unavailable. Please have some patience and allow the database to reconnect.");
-    const uB = await Command.translate(m.guildData.settings.lang, "You have been blacklisted from this bot. You do not have permission to use commands.");
-    const iE = await Command.translate(m.guildData.settings.lang, "There was an internal error. Please report this to a bot developer.");
+    // const iD = await Command.translate(m.guildData.settings.lang, "This command is currently under development!");
+    // const nGO = await Command.translate(m.guildData.settings.lang, "You're not the guild owner. You do not have permission to change this setting!");
+    // const nDMS = await Command.translate(m.guildData.settings.lang, "This command does not support Direct Messages.");
+    // const nBO = await Command.translate(m.guildData.settings.lang, "You're not a bot owner. You do not have permission to use this command.");
+    // const cELf = await Command.translate(m.guildData.settings.lang, "This command won't run because the following permissions are missing");
+    // const cELs = await Command.translate(m.guildData.settings.lang, "Embed Links");
+    // const dU = await Command.translate(m.guildData.settings.lang, "This command has failed to run as the database is currently unavailable. Please have some patience and allow the database to reconnect.");
+    // const uB = await Command.translate(m.guildData.settings.lang, "You have been blacklisted from this bot. You do not have permission to use commands.");
+    // const iE = await Command.translate(m.guildData.settings.lang, "There was an internal error. Please report this to a bot developer.");
     m.errors = {
-      inDev: function inDev() { return m.channel.send(`:hammer_pick: ${iD}`); },
-      notGuildOwner: function notGuildOwner() { return m.channel.send(`:x: ${nGO}`); },
-      noDMSupport: function noDMSupport() { return m.channel.send(`:warning: ${nDMS} `); },
-      notBotOwner: function notBotOwner() { return m.channel.send(`:no_entry_sign: ${nBO}`); },
-      cantEmbedLinks: function cantEmbedLinks() { return m.channel.send(`:link: ${cELf}: \`${cELs}\``); },
-      databaseUnavailable: function databaseUnavailable() { return m.channel.send(`:satellite: ${dU}`); },
-      userBlacklisted: function userBlacklisted() { return m.channel.send(`:page_facing_up: ${uB}`); },
-      internalError: function internalError(e) { return m.channel.send(`:boom: ${iE} \`\`\`js\n${e.stack}\n\`\`\``); }
+      inDev: function inDev() { return m.channel.send(`:hammer_pick: This command is currently under development!`); },
+      notGuildOwner: function notGuildOwner() { return m.channel.send(`:x: You're not the guild owner. You do not have permission to change this setting!`); },
+      noDMSupport: function noDMSupport() { return m.channel.send(`:warning: This command does not support Direct Messages.`); },
+      notBotOwner: function notBotOwner() { return m.channel.send(`:no_entry_sign: You're not a bot owner. You do not have permission to use this command.`); },
+      cantEmbedLinks: function cantEmbedLinks() { return m.channel.send(`:link: This command won't run because the following permissions are missing: \`Embed Links\``); },
+      databaseUnavailable: function databaseUnavailable() { return m.channel.send(`:satellite: This command has failed to run as the database is currently unavailable. Please have some patience and allow the database to reconnect.`); },
+      userBlacklisted: function userBlacklisted() { return m.channel.send(`:page_facing_up: You have been blacklisted from this bot. You do not have permission to use commands.`); },
+      internalError: function internalError(e) { return m.channel.send(`:boom: There was an internal error. Please report this to a bot developer. \`\`\`js\n${e.stack}\n\`\`\``); }
     };
     /* eslint-enable max-len */
     m.ep = true;
