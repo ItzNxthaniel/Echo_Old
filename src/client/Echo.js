@@ -111,6 +111,13 @@ class Echo extends Client {
   getAllArguments(args, text) {
     return text.substring(args.map(a => a.length + 1).reduce((a, b) => a + b, 0), text.length);
   }
+  getRole(type, v, g) {
+    if (type == "id") {
+      return g.roles.get(v);
+    } else if (type == "name") {
+      return g.roles.find(r => r.name.toLowerCase() === v.toLowerCase());
+    }
+  }
 }
 
 exports = new Echo();

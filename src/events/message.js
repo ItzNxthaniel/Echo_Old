@@ -30,7 +30,7 @@ class Message extends Event {
       const afkCollection = this.client.dbm.collection(mdb.afk);
       const afkData = await afkCollection.findOne({ id: m.author.id });
       if (afkData && afkData.id == m.author.id) {
-        await m.channel.send(":sparkles: Welcome back! I've removed your AFK message.");
+        await m.reply("welcome back to discord! :wave:");
         await afkCollection.deleteMany({ id: m.author.id });
       }
     } catch (e) {
@@ -75,6 +75,9 @@ class Message extends Event {
       databaseUnavailable: function databaseUnavailable() { return m.channel.send(`:satellite: This command has failed to run as the database is currently unavailable. Please have some patience and allow the database to reconnect.`); },
       userBlacklisted: function userBlacklisted() { return m.channel.send(`:page_facing_up: You have been blacklisted from this bot. You do not have permission to use commands.`); },
       internalError: function internalError(e) { return m.channel.send(`:boom: There was an internal error. Please report this to a bot developer. \`\`\`js\n${e.stack}\n\`\`\``); }
+    };
+    m.flup = function flup(text) {
+      return text.substring(0, 1).toUpperCase() + text.substring(1, m.content.length);
     };
     /* eslint-enable max-len */
     m.ep = true;

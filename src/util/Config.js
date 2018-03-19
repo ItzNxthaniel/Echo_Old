@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 module.exports = {
+  hubID: "406966876367749131",
   messages: {
     prefix: "ei$"
   },
