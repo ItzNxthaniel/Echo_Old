@@ -19,21 +19,24 @@ class DefaultServer {
         enabled: false,
         words: []
       },
-      mutes: [],
-      kicks: [],
-      bans: []
+      dmr: {
+        mute: false,
+        warn: false,
+        kick: false,
+        ban: false,
+      }
     };
     this.settings = {
       lang: "english",
       notifications: false,
       preferEmbeds: false,
-      noInvite: "",
-      noLink: "",
+      noInvite: false,
+      noLink: false,
       prefix: "default",
-      donated: false,
       logs: {
         member: "",
-        action: ""
+        action: "",
+        warn: ""
       },
       auto_join_role: {
         user: {
@@ -176,4 +179,5 @@ class DBManager {
     return this.db.collection(name);
   }
 }
+
 module.exports.DBManager = DBManager;
