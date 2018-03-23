@@ -4,7 +4,8 @@ class Eval extends Command {
   constructor(client, path) {
     super(client, path, {
       name: "eval",
-      desc: "Evaluates code on the bot."
+      desc: "Evaluates code on the bot.",
+      perm: "Bot Owner"
     });
   }
   execute(m) {

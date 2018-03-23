@@ -7,9 +7,10 @@ const translatePromise = promisify(gTrans.translate);
 const { langCodes } = require("../util/Config.js").lang;
 
 class Command {
-  constructor(client, path, { aliases, desc, name }) {
+  constructor(client, path, { perm, aliases, desc, name }) {
     this.aliases = aliases || [];
     this.client = client;
+    this.perm = perm || "None";
     this.desc = desc || "No Description Available";
     this.name = name;
     this.path = path;

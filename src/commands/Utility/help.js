@@ -4,7 +4,7 @@ class Help extends Command {
   constructor(client, path) {
     super(client, path, {
       name: "help",
-      description: "Returns the list of the commands",
+      desc: "Returns the list of the commands",
       aliases: ["cmds", "commands", "clist", "?"]
     });
   }
@@ -30,8 +30,20 @@ class Help extends Command {
         "If you have any questions or need some help, feel free to join Echo's Home Server: https://discord.gg/hrmnCC8";
       return m.author.send(msg);
     }
+
+    const cmd = this.client.commands.get(s);
+    if (!cmd) {
+      this.typing(false, m.channel);
+      return m.channel.send(await this.translate(m.guildData.settings.lang, "I couldn't find that requested command!"));
+    }
+
     this.typing(false, m.channel);
-    return m.errors.inDev();
+    const msg = `Heres your requested information.\n` +
+    `>> *Name*: ${m.flup(cmd.name)}\n` +
+    `>> *Description*: ${cmd.desc}\n` +
+    `>> *Aliases*: \`${cmd.aliases.length < 1 ? "None" : cmd.aliases.join("`, `")}\`\n` +
+    `>> *Perm Needed*: ${cmd.perm}`;
+    return m.channel.send(msg);
   }
 }
 
