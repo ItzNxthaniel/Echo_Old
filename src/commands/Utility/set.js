@@ -53,7 +53,7 @@ class Set extends Command {
         const sp = await this.translate(m.guildData.settings.lang, "if there were captialized characters I went ahead and lowered them!");
         m.channel.send(`${fp} \`e$\` ${sp}`);
       }
-    } else if (["lang", "l"].includes(f)) {
+    } else if (["lang", "l", "language"].includes(f)) {
       if (!m.isGuildOwner && !m.isOwner) {
         this.typing(false, m.channel);
         return m.errors.notGuildOwner();
