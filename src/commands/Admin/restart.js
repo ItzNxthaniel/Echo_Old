@@ -5,7 +5,8 @@ class Restart extends Command {
   constructor(client, path) {
     super(client, path, {
       name: "restart",
-      desc: "Only Runnable by Bot Owner"
+      desc: "Only Runnable by Bot Owner",
+      aliases: ["reboot"]
     });
   }
   execute(m) {

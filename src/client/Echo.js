@@ -118,6 +118,9 @@ class Echo extends Client {
       return g.roles.find(r => r.name.toLowerCase() === v.toLowerCase());
     }
   }
+  getRandom(v) {
+    return v[Math.floor(Math.random() * v.length)];
+  }
 }
 
 exports = new Echo();
