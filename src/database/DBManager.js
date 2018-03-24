@@ -17,15 +17,70 @@ class DefaultServer {
       spam_protect: false,
       swear_filter: {
         enabled: false,
+        message: "",
+        action: {
+          warn: false,
+          mute: false,
+          kick: false,
+          ban: false
+        },
         words: []
       },
-      dmr: {
-        mute: false,
-        warn: false,
-        kick: false,
-        ban: false,
+      bans: {
+        dmr: false,
+        actOnSwear: {
+          enabled: false,
+          message: "",
+        }
+      },
+      kicks: {
+        dmr: false,
+        actOnSwear: {
+          enabled: false,
+          message: "",
+        }
+      },
+      warns: {
+        dmr: false,
+        actOnSwear: {
+          enabled: false,
+          message: "",
+        }
+      },
+      mutes: {
+        dmr: false,
+        actOnSwear: {
+          enabled: false,
+          message: "",
+        }
       }
     };
+    this.events = {
+      join: {
+        message: {
+          enabled: false,
+          channel: "",
+          message: "",
+        },
+        role: {
+          enabled: false,
+          channel: "",
+          roleID: ""
+        },
+        botRole: {
+          enabled: false,
+          channel: "",
+          roleID: ""
+        }
+      },
+      leave: {
+        message: {
+          enabled: false,
+          channel: "",
+          message: ""
+        }
+      }
+    }
     this.settings = {
       lang: "english",
       notifications: false,
@@ -34,21 +89,9 @@ class DefaultServer {
       noLink: false,
       prefix: "default",
       logs: {
-        member: "",
         action: "",
         warn: ""
       },
-      auto_join_role: {
-        user: {
-          enabled: false,
-          role_id: ""
-        },
-        bot: {
-          enabled: false,
-          role_id: ""
-        }
-      },
-      user_leave_notify: false
     };
   }
 }
@@ -69,7 +112,7 @@ class DBManager {
       mongo.host}:${
       mongo.port}/${
       mongo.database}`;
-    this.mcient = null,
+    this.mclient = null,
       this.db = null
   }
 
@@ -86,11 +129,11 @@ class DBManager {
   async connect() {
     this.debug('Creating Database...');
     try {
-      this.mcient = await MongoClient.connect(this.url, null);
+      this.mclient = await MongoClient.connect(this.url, null);
     } catch (e) {
       return this.error(e);
     }
-    this.db = this.mcient.db(mongo.database);
+    this.db = this.mclient.db(mongo.database);
     this.db.on("close", mongoError => {
       this.error("Database Randomly Closed");
       if (mongoError) this.error(`Error: ${mongoError.stack}`);
