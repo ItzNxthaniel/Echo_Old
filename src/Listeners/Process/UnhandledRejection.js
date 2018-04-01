@@ -1,10 +1,10 @@
-const { Listener } = require('discord-akairo');
+const { Listener } = require("discord-akairo");
 
 class ProcessUnhandledRejection extends Listener {
   constructor() {
-    super('processUnhandledRejection', {
-      emitter: 'process',
-      event: 'unhandledRejection'
+    super("processUnhandledRejection", {
+      emitter: "process",
+      event: "unhandledRejection"
     });
   }
 
