@@ -9,7 +9,7 @@ class Ping extends Command {
     });
   }
   exec(m) {
-    return m.channel.send(`*The current speed of the WebSocket is **${this.client.ping.toFixed(0)}**ms.*`);
+    return m.channel.send(`The current speed of the WebSocket is **${this.client.ping.toFixed(0)}**ms.`);
   }
 }
 
