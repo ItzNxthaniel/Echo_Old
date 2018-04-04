@@ -36,6 +36,7 @@ class Subscribe extends Command {
       args.f = args.f.replace("+", "");
       if (args.s) args.f = args.s.replace("+", "");
       if (args.t) args.f = args.f.replace("+", "");
+      m.channel.send(args.f);
     }
     if (args.f.substring(0, 1) == "-" || args.s.substring(0, 1) == "-" || args.t.substring(0, 1) == "-") return m.channel.send("-Soon:tm:");
   }
