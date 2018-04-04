@@ -1,9 +1,9 @@
 const { Command } = require("discord-akairo");
 
-class Sub extends Command {
+class Subscribe extends Command {
   constructor() {
-    super("sub", {
-      aliases: ["sub"],
+    super("subscribe", {
+      aliases: ["subscribe", "sub"],
       split: "plain",
       args: [
         {
@@ -41,4 +41,4 @@ class Sub extends Command {
   }
 }
 
-module.exports = Sub;
+module.exports = Subscribe;

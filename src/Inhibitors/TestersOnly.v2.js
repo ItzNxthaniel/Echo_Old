@@ -4,6 +4,7 @@ class TestersOnly extends Inhibitor {
   constructor() {
     super("testers", {
       reason: "testers",
+      split: "plain",
       args: [
         {
           id: "commandID"
@@ -12,7 +13,7 @@ class TestersOnly extends Inhibitor {
     });
   }
   exec(m, args) {
-    if (args.commandID == "sub") return true;
+    if (args.commandID == "subscribe") return true;
     /* eslint-disable */
     const testers = [
       "112732946774962176", // FireController1847
