@@ -11,6 +11,7 @@ const client = new AkairoClient({
   emitters: { process },
   commandDirectory: path.join(__dirname, "Commands"),
   listenerDirectory: path.join(__dirname, "Listeners"),
+  inhibitorDirectory: path.join(__dirname, "Inhibitors"),
   // Custom Options
   colors: {
     orange: "#FFA500",
@@ -22,14 +23,6 @@ const client = new AkairoClient({
     idNum: "v2",
     idName: "Skeletons"
   },
-  testers: [
-    "112732946774962176",
-    "219928294278168577",
-    "187771864435785728",
-    "261236127581601793",
-    "295391820744228867",
-    "166228540214214657"
-  ],
   helpMsgs: [
     /* Goomig */
     "Help is flying through the sky, into your DMs!", "Help is sliding on ice, into your DMs!", "Whoops, Slip, SQUASH THAT REQUEST FOR HELP HERE I COME!",
