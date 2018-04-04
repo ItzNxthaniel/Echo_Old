@@ -17,6 +17,19 @@ const client = new AkairoClient({
     green: "#92EE8F",
     red: "#FF9494"
   },
+  hubID: "406966876367749131",
+  buildVersion: {
+    idNum: "v2",
+    idName: "Skeletons"
+  },
+  testers: [
+    "112732946774962176",
+    "219928294278168577",
+    "187771864435785728",
+    "261236127581601793",
+    "295391820744228867",
+    "166228540214214657"
+  ],
   helpMsgs: [
     /* Goomig */
     "Help is flying through the sky, into your DMs!", "Help is sliding on ice, into your DMs!", "Whoops, Slip, SQUASH THAT REQUEST FOR HELP HERE I COME!",
