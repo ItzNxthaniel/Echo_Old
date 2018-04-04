@@ -16,7 +16,7 @@ class Help extends Command {
   }
   exec(m, args) {
     if (!args.commandID) {
-      m.channel.send(this.client.akairoOptions.helpMsgs[Math.floor(Math.random() * this.client.akairoOptions.helpMsgs.length)]);
+      m.channel.send(this.client.options.helpMsgs[Math.floor(Math.random() * this.client.options.helpMsgs.length)]);
       const msg = "We thank you for choosing Echo, as your multi-use bot! Here's a list of commands that you requested.\n\n" +
         "// **Utility Commands**\n" +
         ">> e$donate\n" +

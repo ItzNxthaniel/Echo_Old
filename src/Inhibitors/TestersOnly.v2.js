@@ -3,14 +3,20 @@ const { Inhibitor } = require("discord-akairo");
 class TestersOnly extends Inhibitor {
   constructor() {
     super("testers", {
-      reason: "testers"
+      reason: "testers",
+      args: [
+        {
+          id: "commandID"
+        }
+      ]
     });
   }
-  exec(m) {
+  exec(m, args) {
+    if (args.commandID == "sub") return true;
     /* eslint-disable */
     const testers = [
       "112732946774962176", // FireController1847
-      "147891648628654082", // GoomigJS
+      "147891648628654082" // GoomigJS
     ];
     /* eslint-enable */
     return !testers.includes(m.author.id);

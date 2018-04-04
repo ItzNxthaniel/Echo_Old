@@ -11,12 +11,12 @@ const client = new AkairoClient({
   emitters: { process },
   commandDirectory: path.join(__dirname, "Commands"),
   listenerDirectory: path.join(__dirname, "Listeners"),
-  inhibitorDirectory: path.join(__dirname, "Inhibitors"),
-  // Custom Options
+  inhibitorDirectory: path.join(__dirname, "Inhibitors")
+}, {
   colors: {
-    orange: "#FFA500",
-    green: "#92EE8F",
-    red: "#FF9494"
+    orange: 0xFFA500,
+    green: 0x92EE8F,
+    red: 0xFF9494
   },
   hubID: "406966876367749131",
   buildVersion: {
@@ -32,8 +32,15 @@ const client = new AkairoClient({
     "YA NEED HELP?",
     /* Fiery_Hacker */
     "Bringing in the reinforcements..."
-  ]
-}, { disableEveryone: true });
+  ],
+  roles: {
+    news: "420045140732805120",
+    twitter: "420040434342166568",
+    partner: "420043708210085901",
+    partnerNews: "431210967595089926"
+  },
+  disableEveryone: true
+});
 
 client.mongo = new MongoDB(client);
 client.login(token);

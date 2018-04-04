@@ -7,7 +7,8 @@ class Reload extends Command {
       ownerOnly: true,
       args: [
         {
-          id: "commandID"
+          id: "commandID",
+          type: "lowercase"
         }
       ]
     });
