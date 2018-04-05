@@ -3,17 +3,11 @@ const { Inhibitor } = require("discord-akairo");
 class TestersOnly extends Inhibitor {
   constructor() {
     super("testers", {
-      reason: "testers",
-      split: "plain",
-      args: [
-        {
-          id: "commandID"
-        }
-      ]
+      reason: "testers"
     });
   }
-  exec(m, args) {
-    if (args.commandID == "subscribe") return true;
+  exec(m, c) {
+    if (c.id == "subscribe") return false;
     /* eslint-disable */
     const testers = [
       "112732946774962176", // FireController1847

@@ -37,10 +37,28 @@ const client = new AkairoClient({
     news: "420045140732805120",
     twitter: "420040434342166568",
     partner: "420043708210085901",
-    partnerNews: "431210967595089926"
+    partner_news: "431210967595089926"
   },
   disableEveryone: true
 });
+
+client.flup = function(text, m) {
+  return text.substring(0, 1).toUpperCase() + text.substring(1, m.content.length);
+};
+
+// Debug && Error ~ By: Fire
+client.debug = function() {
+  const args = Array.prototype.slice.call(arguments);
+  args.unshift(`[Shard ${client.options.shardId}]`);
+  console.log.apply(console, args);
+};
+
+client.error = function() {
+  const args = Array.prototype.slice.call(arguments);
+  args.unshift(`[Shard ${client.options.shardId}]`);
+  console.error.apply(console, args);
+};
+
 
 client.mongo = new MongoDB(client);
 client.login(token);
