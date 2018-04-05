@@ -26,19 +26,22 @@ class Subscribe extends Command {
     if (args.f == "+all" || args.f == "-all" && !args.s) {
       if (args.f == "+all") {
         m.member.roles.add([this.client.options.roles.twitter, this.client.options.roles.news, this.client.options.roles.partnerNews]);
-        m.channel.send("Alright I've subscribed you to, `Twitter Updates`, `News Updates`, and `New Partner Updates`.");
+        return m.channel.send("Alright I've subscribed you to, `Twitter Updates`, `News Updates`, and `New Partner Updates`.");
       } else if (args.f == "-all") {
         m.member.roles.remove([this.client.options.roles.twitter, this.client.options.roles.news, this.client.options.roles.partnerNews]);
-        m.channel.send("Alright I've unsubscribed you from, `Twitter Updates`, `News Updates`, and `New Partner Updates`.");
+        return m.channel.send("Alright I've unsubscribed you from, `Twitter Updates`, `News Updates`, and `New Partner Updates`.");
       }
     }
     if (args.f.substring(0, 1) == "+" || args.s.substring(0, 1) == "+" || args.t.substring(0, 1) == "+") {
-      args.f = args.f.replace("+", "");
-      if (args.s) args.f = args.s.replace("+", "");
-      if (args.t) args.f = args.f.replace("+", "");
-      m.channel.send(args.f);
+      const f = args.f.replace("+", "");
+      let s = null;
+      let t = null;
+      console.log(f, s, t);
+      if (args.s && args.s.substring(0, 1) == "+") s = args.s.replace("+", "");
+      if (args.t && args.t.substring(0, 1) == "+") t = args.t.replace("+", "");
+      m.channel.send(f);
     }
-    if (args.f.substring(0, 1) == "-" || args.s.substring(0, 1) == "-" || args.t.substring(0, 1) == "-") return m.channel.send("-Soon:tm:");
+    if (args.f.substring(0, 1) == "-" || args.s && args.s.substring(0, 1) == "-" || args.t && args.t.substring(0, 1) == "-") return m.channel.send("-Soon:tm:");
   }
 }
 

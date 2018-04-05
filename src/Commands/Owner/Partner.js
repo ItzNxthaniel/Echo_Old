@@ -30,7 +30,7 @@ class Partner extends Command {
     if (!args || !args.name || !args.desc || !args.owner || !args.iconURL || !args.invite) {
       m.delete();
       m.channel.send(":x: You're missing args, please check again!").then(snt => {
-        setTimeout(() => { snt.delete(); }, 10000);
+        setTimeout(() => { snt.delete(); }, 5000);
       });
     }
     m.delete();
