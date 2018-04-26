@@ -29,7 +29,7 @@ class Partner extends Command {
     if (m.channel.id != "408786425950240781") return m.channel.send("This command can only be ran in <#408786425950240781>");
     if (!args || !args.name || !args.desc || !args.owner || !args.iconURL || !args.invite) {
       m.delete();
-      m.channel.send(":x: You're missing args, please check again!").then(snt => {
+      return m.channel.send(":x: You're missing args, please check again!").then(snt => {
         setTimeout(() => { snt.delete(); }, 5000);
       });
     }
