@@ -11,7 +11,8 @@ class TestersOnly extends Inhibitor {
     /* eslint-disable */
     const testers = [
       "112732946774962176", // FireController1847
-      "147891648628654082" // GoomigJS
+      "147891648628654082", // GoomigJS
+      "166228540214214657" // Wistful__
     ];
     /* eslint-enable */
     return !testers.includes(m.author.id);
