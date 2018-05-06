@@ -1,5 +1,5 @@
 const { Command } = require("discord-akairo");
-const { getVC } = require("./MusicManager.js");
+const { getVC } = require("./musicManager.js");
 
 class vcGet extends Command {
   constructor() {
