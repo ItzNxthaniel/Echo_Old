@@ -172,6 +172,15 @@ class MongoDB {
     `${guild.name} (${guild.id}) owned by ${guild.owner.user.username} (${guild.owner.id}).`);
     return data;
   }
+  /*
+  async deleteGuild(gid) {
+    if (!this.db) throw new Error("Database Not Ready");
+    const guild = this.bot.guilds.get(gid);
+    if (!guild) throw new Error("Cannot Find Guild");
+    if (!this.guilds) await this.db.createCollection(mongo.collections.guilds);
+    await this.guilds.deleteMany({ gid });
+  }
+  */
   async fetchGuild(gid) {
     if (!this.db) throw new Error("Database Not Ready");
     let data = await this.guilds.findOne({ gid });
