@@ -101,7 +101,7 @@ const client = new AkairoClient({
       type: "LISTENING"
     },
     {
-      title: "on " + this.client.guilds.size + " " + this.client.guilds.size == 1 ? "server!" : "servers!",
+      title: "on " + this.client.user.guilds.size + " " + this.client.user.guilds.size == 1 ? "server!" : "servers!",
       type: "PLAYING"
     },
     {
