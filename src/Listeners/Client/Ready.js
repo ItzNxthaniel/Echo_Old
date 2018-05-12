@@ -16,7 +16,7 @@ class ClientReady extends Listener {
     });
     */
 
-    this.client.user.setActivity("on " + this.client.guilds.size + " " + this.client.guilds.size == 1 ? "server!" : "servers!");
+    this.client.user.setActivity(`on ${this.client.guilds.size} ${this.client.guilds.size == 1 ? "server!" : "servers!"}`);
     console.log(`Online and ready! This shard is on ${this.client.guilds.size} guilds.`);
   }
 }
