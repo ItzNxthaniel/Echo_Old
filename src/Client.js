@@ -23,6 +23,84 @@ const client = new AkairoClient({
     idNum: "v2",
     idName: "Skeletons"
   },
+  playingS: [
+    {
+      title: "with your feelings",
+      type: "PLAYING"
+    },
+    {
+      title: "with dogs",
+      type: "PLAYING"
+    },
+    {
+      title: "Simon Says",
+      type: "PLAYING"
+    },
+    {
+      title: "I Spy",
+      type: "PLAYING"
+    },
+    {
+      title: "with chess pieces",
+      type: "PLAYING"
+    },
+    {
+      title: "with Goomig",
+      type: "PLAYING"
+    },
+    {
+      title: "with a rubber duck",
+      type: "PLAYING"
+    },
+    {
+      title: "your complaints",
+      type: "LISTENING"
+    },
+    {
+      title: "your movements",
+      type: "WATCHING"
+    },
+    {
+      title: "as Big Brother",
+      type: "PLAYING"
+    },
+    {
+      title: "Stranger Things",
+      type: "WATCHING"
+    },
+    {
+      title: "Crunchyroll",
+      type: "WATCHING"
+    },
+    {
+      title: "Spotify",
+      type: "LISTENING"
+    },
+    {
+      title: "your commands",
+      type: "LISTENING"
+    },
+    {
+      title: "kids run",
+      type: "WATCHING"
+    },
+    {
+      title: "your demands",
+      type: "LISTENING"
+    },
+    {
+      title: "to FM Radio",
+      type: "LISTENING"
+    },
+    {
+      title: "nervous users",
+      type: "LISTENING"
+    },
+    {
+      title: "users nervously",
+      type: "LISTENING"
+    }
+  ],
   helpMsgs: [
     /* Goomig */
     "Help is flying through the sky, into your DMs!", "Help is sliding on ice, into your DMs!", "Whoops, Slip, SQUASH THAT REQUEST FOR HELP HERE I COME!",
@@ -59,6 +137,13 @@ client.error = function() {
   console.error.apply(console, args);
 };
 
+setInterval(() => {
+  const cS = client.options.playingS[Math.floor(Math.random() * client.options.playingS.length)];
+
+  client.user.setActivity(cS.title, {
+    type: cS.type
+  });
+}, 60000);
 
 client.mongo = new MongoDB(client);
 client.login(token);
