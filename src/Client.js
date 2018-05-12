@@ -101,10 +101,6 @@ const client = new AkairoClient({
       type: "LISTENING"
     },
     {
-      title: "on " + this.client.user.guilds.size + " " + this.client.user.guilds.size == 1 ? "server!" : "servers!",
-      type: "PLAYING"
-    },
-    {
       title: "e$help || e:help",
       type: "PLAYING"
     }
