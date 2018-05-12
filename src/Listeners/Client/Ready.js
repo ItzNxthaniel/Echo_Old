@@ -15,6 +15,12 @@ class ClientReady extends Listener {
       type: "STREAMING"
     });
     */
+
+    const cS = this.client.options.playingS[Math.floor(Math.random() * this.client.options.playingS.length)];
+
+    this.client.user.setActivity(cS.title, {
+      type: cS.type
+    });
     console.log(`Online and ready! This shard is on ${this.client.guilds.size} guilds.`);
   }
 }

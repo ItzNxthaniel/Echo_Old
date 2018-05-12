@@ -25,80 +25,88 @@ const client = new AkairoClient({
   },
   playingS: [
     {
-      title: "with your feelings",
+      title: "with your feelings!",
       type: "PLAYING"
     },
     {
-      title: "with dogs",
+      title: "with dogs!",
       type: "PLAYING"
     },
     {
-      title: "Simon Says",
+      title: "Simon Says!",
       type: "PLAYING"
     },
     {
-      title: "I Spy",
+      title: "I Spy!",
       type: "PLAYING"
     },
     {
-      title: "with chess pieces",
+      title: "with chess pieces!",
       type: "PLAYING"
     },
     {
-      title: "with Goomig",
+      title: "with Goomig!",
       type: "PLAYING"
     },
     {
-      title: "with a rubber duck",
+      title: "with a rubber duck!",
       type: "PLAYING"
     },
     {
-      title: "your complaints",
+      title: "your complaints!",
       type: "LISTENING"
     },
     {
-      title: "your movements",
+      title: "your movements!",
       type: "WATCHING"
     },
     {
-      title: "as Big Brother",
+      title: "as Big Brother!",
       type: "PLAYING"
     },
     {
-      title: "Stranger Things",
+      title: "Stranger Things!",
       type: "WATCHING"
     },
     {
-      title: "Crunchyroll",
+      title: "Crunchyroll!",
       type: "WATCHING"
     },
     {
-      title: "Spotify",
+      title: "Spotify!",
       type: "LISTENING"
     },
     {
-      title: "your commands",
+      title: "your commands!",
       type: "LISTENING"
     },
     {
-      title: "kids run",
+      title: "kids run!",
       type: "WATCHING"
     },
     {
-      title: "your demands",
+      title: "your demands!",
       type: "LISTENING"
     },
     {
-      title: "to FM Radio",
+      title: "FM Radio!",
       type: "LISTENING"
     },
     {
-      title: "nervous users",
+      title: "nervous users!",
       type: "LISTENING"
     },
     {
-      title: "users nervously",
+      title: "users nervously!",
       type: "LISTENING"
+    },
+    {
+      title: "on " + this.client.guilds.size + " " + this.client.guilds.size == 1 ? "server!" : "servers!",
+      type: "PLAYING"
+    },
+    {
+      title: "e$help || e:help",
+      type: "PLAYING"
     }
   ],
   helpMsgs: [
