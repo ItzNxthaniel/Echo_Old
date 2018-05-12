@@ -7,23 +7,23 @@ class Restart extends Command {
       ownerOnly: true,
       args: [
         {
-          id: "shardID",
-          type: "number"
+          id: "content",
+          type: "lowercase"
         }
       ]
     });
   }
   async exec(m, args) {
-    if (!this.client.shard) {
-      await m.channel.send(`Restarting.`);
+    if (args.content == "all") {
+      await m.channel.send("Restarting, the whole bot!");
       return process.exit();
-    }
-    if (!args.shardID) {
+    } else if (args.content != "all") {
       await m.channel.send(`Restarting shard ${this.client.shard.id}.`);
       return process.exit();
+    } else {
+      await m.channel.send(`Attempting to restart shard ${args.shardID}.`);
+      await this.client.shard.broadcastEval(`if (this.shard.id == ${args.shardID.toString()}) process.exit();`);
     }
-    await m.channel.send(`Attempting to restart shard ${args.shardID}.`);
-    await this.client.shard.broadcastEval(`if (this.shard.id == ${args.shardID.toString()}) process.exit();`);
   }
 }
 
