@@ -3,12 +3,8 @@ module.exports = {
     if (m.member.voiceChannel) return "You're currently in, `" + m.member.voiceChannel.name + "`";
     return "You're aren't in any VC, join one and try again.";
   },
-  check4VC: m => {
-    if (m.member.voiceChannel) return true;
-    return false;
-  },
   play: m => {
-    const vcCheck = this.check4VC(m);
+    const vcCheck = m.member.voiceChannel ? true : false;
     if (vcCheck) {
       const vc = m.member.voiceChannel;
       vc.join();
