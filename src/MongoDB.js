@@ -172,6 +172,11 @@ class MongoDB {
     }
     return this.collections.guilds.col;
   }
+
+  mVerifyDataIntegrity(gid, uid, data) {
+    return _.merge(new DefaultMute(uid, gid), data);
+  }
+
   verifyDataIntegrity(gid, data) {
     return _.merge(new DefaultServer(gid), data);
   }
@@ -214,6 +219,15 @@ class MongoDB {
     if (!data) data = await this.createGuild(gid, true);
     delete data._id;
     data = this.verifyDataIntegrity(gid, data);
+    return data;
+  }
+
+  async fetchMute(uid, gid) {
+    if (!this.db) throw new Error("Database Not Ready");
+    let data = await this.mute.findOne({ u_id: uid, g_id: gid });
+    if (!data) data = await this.createMute(gid, uid);
+    delete data._id;
+    data = this.mVerifyDataIntegrity(gid, uid, data);
     return data;
   }
 }
