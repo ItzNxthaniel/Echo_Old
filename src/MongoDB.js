@@ -45,6 +45,8 @@ class DefaultServer {
       warns: {
         dmr: false,
         am2Mute: null,
+        am2Kick: null,
+        am2Ban: null,
         actOnSwear: {
           enabled: false,
           message: ""
