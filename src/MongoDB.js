@@ -198,6 +198,7 @@ class MongoDB {
     const guild = this.bot.guilds.get(gid);
     if (!guild) throw new Error("Cannot Find Guild");
     if (!this.guilds) await this.db.createCollection(mongo.collections.guilds);
+    await this.guilds.deleteMany({ gid });
     const data = new DefaultServer(gid);
     await this.guilds.insertOne(data);
     console.log(!guild ? `I"ve joined ${gid}.` : `I"ve ${(isMissing ? "added missing guild" : "joined")} ` +
