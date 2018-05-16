@@ -14,6 +14,7 @@ class Restart extends Command {
     });
   }
   async exec(m, args) {
+    if (!args.content) return m.channel.send("Sorry, you need to supply a `shard id` or `all` to successfully restart the bot.");
     if (args.content == "all") {
       await m.channel.send("Restarting, the whole bot!");
       return process.exit();
