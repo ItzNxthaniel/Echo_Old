@@ -10,7 +10,7 @@ const parsems = require("parse-duration");
 class Mute extends Command {
   constructor() {
     super("mute", {
-      aliases: ["subscribe", "sub"],
+      aliases: ["mute"],
       split: "plain",
       args: [
         { id: "userTag", type: "memberMention" },
