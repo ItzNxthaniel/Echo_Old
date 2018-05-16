@@ -44,11 +44,11 @@ class DefaultServer {
       },
       warns: {
         dmr: false,
+        am2Mute: null,
         actOnSwear: {
           enabled: false,
           message: ""
-        },
-        delOMsg: false
+        }
       },
       mutes: {
         dmr: false,
@@ -58,8 +58,7 @@ class DefaultServer {
           time: null,
           reason: "",
           message: ""
-        },
-        delOMsg: false
+        }
       }
     };
     this.events = {
@@ -99,6 +98,17 @@ class DefaultServer {
         action: "",
         warn: ""
       }
+    };
+  }
+}
+
+class DefaultMute {
+  constructor(uid, gid) {
+    this.u_id = uid;
+    this.g_id = gid;
+    this.muteInfo = {
+      time: null,
+      reason: null
     };
   }
 }
@@ -163,12 +173,24 @@ class MongoDB {
   verifyDataIntegrity(gid, data) {
     return _.merge(new DefaultServer(gid), data);
   }
+
+  async createMute(gid, uid) {
+    if (!this.id) throw new Error("Database Not Ready");
+    const guild = this.bot.guilds.get(gid);
+    if (!guild) throw new Error("Cannot Find Guild");
+    const user = this.bot.users.get(uid);
+    if (!user) throw new Error("Cannot find User");
+    if (!this.mutes) await this.db.createCollection(mongo.collections.mutes);
+    const data = new DefaultMute(uid, gid);
+    await this.mutes.insertOne(data);
+    return data;
+  }
+
   async createGuild(gid, isMissing = false) {
     if (!this.db) throw new Error("Database Not Ready");
     const guild = this.bot.guilds.get(gid);
     if (!guild) throw new Error("Cannot Find Guild");
     if (!this.guilds) await this.db.createCollection(mongo.collections.guilds);
-    await this.guilds.deleteMany({ gid });
     const data = new DefaultServer(gid);
     await this.guilds.insertOne(data);
     console.log(!guild ? `I"ve joined ${gid}.` : `I"ve ${(isMissing ? "added missing guild" : "joined")} ` +
