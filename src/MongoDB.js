@@ -52,8 +52,11 @@ class DefaultServer {
       },
       mutes: {
         dmr: false,
+        mRoleID: "",
         actOnSwear: {
           enabled: false,
+          time: null,
+          reason: "",
           message: ""
         },
         delOMsg: false
