@@ -27,7 +27,7 @@ class Mute extends Command {
     const member = m.mentions.members.first();
     const reason = !args.reason ? "NO_REASON_PROVIDED" : args.reason;
     const mRole = gData.moderation.mutes.mRoleID;
-    if (!mRole) return m.channel.send(`There is no mute role set! Please run, ${this.handler.prefix}${this.id}`);
+    if (!mRole) return m.channel.send(`There is no mute role set! Please run, \`${this.handler.prefix}set\` to get started`);
     if (m.member.highestRole.position <= member.highestRole.position) return m.channel.send(`You can't manage this user's roles!`);
 
     // Time Handler
