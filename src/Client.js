@@ -103,6 +103,10 @@ const client = new AkairoClient({
     {
       title: "e$help || e:help",
       type: "PLAYING"
+    },
+    {
+      title: "my gears creak",
+      type: "LISTENING"
     }
   ],
   helpMsgs: [

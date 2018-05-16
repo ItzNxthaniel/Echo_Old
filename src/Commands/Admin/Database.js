@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2018, Visual Fire Development  All Rights Reserved
+ * Copyrights licensed under the GNU General Public License v3.0.
+ * See the accompanying LICENSE file for terms.
+ */
+
 /* eslint-disable max-len */
 const { Command } = require("discord-akairo");
 
@@ -20,7 +26,7 @@ class Database extends Command {
   }
   exec(m, args) {
     if (!args.infoType) {
-      return m.channel.send("Invalid Option, please choose `debug`, `reset`, or `help`." +
+      return m.channel.send("Invalid Option, please choose `debug`, `reset`, or `help`. " +
        `Example: \`${this.handler.prefix}${this.id} reset\``);
     } else if (args.infoType == "debug") {
       return this.handler._handleCommand(m, args.content, this.handler.modules.get("dbdebug"));
