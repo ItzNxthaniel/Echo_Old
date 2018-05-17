@@ -4,7 +4,7 @@ const _ = require("lodash");
 
 class DefaultServer {
   constructor(gid) {
-    this.g_id = gid;
+    this.gid = gid;
     this.music = {
       volume: 100,
       queue: [],
@@ -106,8 +106,8 @@ class DefaultServer {
 
 class DefaultMute {
   constructor(uid, gid) {
-    this.u_id = uid;
-    this.g_id = gid;
+    this.uid = uid;
+    this.gid = gid;
     this.muteInfo = {
       time: null,
       reason: null
@@ -225,7 +225,7 @@ class MongoDB {
 
   async fetchMute(uid, gid) {
     if (!this.db) throw new Error("Database Not Ready");
-    let data = await this.mute.findOne({ u_id: uid, g_id: gid });
+    let data = await this.mute.findOne({ uid, gid });
     if (!data) data = await this.createMute(gid, uid);
     delete data._id;
     data = this.mVerifyDataIntegrity(gid, uid, data);
