@@ -173,6 +173,16 @@ class MongoDB {
     return this.collections.guilds.col;
   }
 
+  get mutes() {
+    if (!this.collections.mutes || Date.now() - this.collections.mutes.age >= 900000) {
+      this.collections.mutes = {
+        col: this.db.collection(mongo.collections.mutes),
+        age: Date.now()
+      };
+    }
+    return this.collections.mutes.col;
+  }
+
   mVerifyDataIntegrity(gid, uid, data) {
     return _.merge(new DefaultMute(uid, gid), data);
   }
@@ -205,6 +215,7 @@ class MongoDB {
     `${guild.name} (${guild.id}) owned by ${guild.owner.user.username} (${guild.owner.id}).`);
     return data;
   }
+
   /*
   async deleteGuild(gid) {
     if (!this.db) throw new Error("Database Not Ready");
@@ -225,7 +236,7 @@ class MongoDB {
 
   async fetchMute(uid, gid) {
     if (!this.db) throw new Error("Database Not Ready");
-    let data = await this.mute.findOne({ uid, gid });
+    let data = await this.mutes.findOne({ uid, gid });
     if (!data) data = await this.createMute(gid, uid);
     delete data._id;
     data = this.mVerifyDataIntegrity(gid, uid, data);
