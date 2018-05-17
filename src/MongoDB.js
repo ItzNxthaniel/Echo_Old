@@ -90,6 +90,7 @@ class DefaultServer {
       }
     };
     this.settings = {
+      partnered: false,
       lang: "english",
       notifications: false,
       preferEmbeds: false,

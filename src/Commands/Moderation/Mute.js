@@ -63,8 +63,8 @@ class Mute extends Command {
     const mData = this.client.mongo.fetchMute(member.user.id, m.guild.id);
     mData.muteInfo.time = time;
     mData.muteInfo.reason = reason;
-    const cMutes = this.client.mongo.db.collection("mutes");
-    cMutes.update({ u_id: member.user.id, g_id: m.guild.id }, mData);
+    const cMutes = this.client.mongo.mutes;
+    cMutes.update({ uid: member.user.id, gid: m.guild.id }, mData);
   }
 }
 
