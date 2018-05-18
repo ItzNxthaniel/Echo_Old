@@ -60,7 +60,7 @@ class Mute extends Command {
     member.roles.add([mRole]);
     m.channel.send(`I have muted the user, *${member.user.tag}*, for *${args.time}*.`);
     this.client.mongo.createMute(m.guild.id, member.user.id);
-    const mData = this.client.mongo.fetchMute(member.user.id, m.guild.id);
+    const mData = await this.client.mongo.fetchMute(member.user.id, m.guild.id);
     mData.muteInfo.time = time;
     mData.muteInfo.reason = reason;
     const cMutes = this.client.mongo.mutes;
