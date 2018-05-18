@@ -15,7 +15,7 @@ class MuteMsg extends Command {
       args: [
         { id: "userTag", type: "memberMention" },
         { id: "time", type: "string" },
-        { id: "content", type: "rest" }
+        { id: "content", match: "rest" }
       ]
     });
   }
@@ -46,10 +46,10 @@ class MuteMsg extends Command {
       const logID = gData.settings.logs.action;
       if (gData.settings.preferEmbeds) {
         this.client.channels.get(logID).send({ embed: {
-          color: this.client.options.colors.red, title: `❌ ${member.user.tag} has been muted!`, description: `Time: **${args.time == "perm" ? "∞" : args.time}** Reason: __${reason}__`
+          color: this.client.options.colors.red, title: `❌ ${member.user.tag} messages have been muted!`, description: `Time: **${args.time == "perm" ? "∞" : args.time}** Reason: __${reason}__`
         } });
       } else {
-        this.client.channels.get(logID).send(`${member.user.tag} has been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${reason}*`);
+        this.client.channels.get(logID).send(`${member.user.tag} messages have been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${reason}*`);
       }
     }
 
