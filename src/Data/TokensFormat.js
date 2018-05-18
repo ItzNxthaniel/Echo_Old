@@ -33,6 +33,7 @@ exports.mongo = {
     guilds: "guilds",
     donations: "donations",
     afk: "afk",
-    blacklist: "blacklist"
+    blacklist: "blacklist",
+    mutes: "mutes"
   }
 };

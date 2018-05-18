@@ -46,15 +46,15 @@ class Mute extends Command {
       const logID = gData.settings.logs.action;
       if (gData.settings.preferEmbeds) {
         this.client.channels.get(logID).send({ embed: {
-          color: this.client.options.colors.red, title: `❌ ${member.user.tag} has been muted!`, description: `Time: **${time == "perm" ? "∞" : time}** Reason: __${reason}__`
+          color: this.client.options.colors.red, title: `❌ ${member.user.tag} has been muted!`, description: `Time: **${args.time == "perm" ? "∞" : args.time}** Reason: __${args.reason}__`
         } });
       } else {
-        this.client.channels.get(logID).send(`${member.user.tag} has been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${reason}*`);
+        this.client.channels.get(logID).send(`${member.user.tag} has been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${args.reason}*`);
       }
     }
 
     if (gData.moderation.mutes.dmr) {
-      member.send(`You've been muted for \`${args.time}\`, on \`${m.guild.name}\`, because \`${reason}\``);
+      member.send(`You've been muted for \`${args.time}\`, on \`${m.guild.name}\`, because \`${args.reason}\``);
     }
 
     member.roles.add([mRole]);
