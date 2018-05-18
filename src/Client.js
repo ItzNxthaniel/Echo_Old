@@ -81,10 +81,6 @@ const client = new AkairoClient({
       type: "LISTENING"
     },
     {
-      title: "kids run!",
-      type: "WATCHING"
-    },
-    {
       title: "your demands!",
       type: "LISTENING"
     },
