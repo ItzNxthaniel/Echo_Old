@@ -111,7 +111,8 @@ class DefaultMute {
     this.gid = gid;
     this.muteInfo = {
       time: null,
-      reason: null
+      reason: null,
+      type: null
     };
   }
 }
