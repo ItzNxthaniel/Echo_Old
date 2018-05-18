@@ -15,7 +15,7 @@ class MuteMsg extends Command {
       args: [
         { id: "userTag", type: "memberMention" },
         { id: "time", type: "string" },
-        { id: "reason", type: "rest" }
+        { id: "content", type: "rest" }
       ]
     });
   }
@@ -25,7 +25,7 @@ class MuteMsg extends Command {
     if (!args.userTag) return m.channel.send("You need to tag a user!");
     if (!args.time) return m.channel.send("You must include the amount of time to mute this user! Example: 29d5h20m98s");
     const member = m.mentions.members.first();
-    const reason = !args.reason ? "NO_REASON_PROVIDED" : args.reason;
+    const reason = !args.content ? "NO_REASON_PROVIDED" : args.content;
     const mRole = gData.moderation.mutes.mRoleID;
     if (!mRole) return m.channel.send(`There is no mute role set! Please run, \`${this.handler.prefix}set\` to get started`);
     if (m.member.roles.highest.position <= member.roles.highest.position) return m.channel.send(`You can't manage this user's roles!`);
@@ -46,19 +46,19 @@ class MuteMsg extends Command {
       const logID = gData.settings.logs.action;
       if (gData.settings.preferEmbeds) {
         this.client.channels.get(logID).send({ embed: {
-          color: this.client.options.colors.red, title: `❌ ${member.user.tag} has been muted!`, description: `Time: **${args.time == "perm" ? "∞" : args.time}** Reason: __${args.reason}__`
+          color: this.client.options.colors.red, title: `❌ ${member.user.tag} has been muted!`, description: `Time: **${args.time == "perm" ? "∞" : args.time}** Reason: __${reason}__`
         } });
       } else {
-        this.client.channels.get(logID).send(`${member.user.tag} has been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${args.reason}*`);
+        this.client.channels.get(logID).send(`${member.user.tag} has been muted for **${args.time == "perm" ? "∞" : args.time}**, reason given: *${reason}*`);
       }
     }
 
     if (gData.moderation.mutes.dmr) {
-      member.send(`You've been muted for \`${args.time}\`, on \`${m.guild.name}\`, because \`${args.reason}\``);
+      member.send(`Your messages have been muted for \`${args.time}\`, on \`${m.guild.name}\`, because \`${reason}\``);
     }
 
     member.roles.add([mRole]);
-    m.channel.send(`I have muted the user, *${member.user.tag}*, for *${args.time}*.`);
+    m.channel.send(`I have muted the message of the user, *${member.user.tag}*, for *${args.time}*.`);
     this.client.mongo.createMute(m.guild.id, member.user.id);
     const mData = await this.client.mongo.fetchMute(member.user.id, m.guild.id);
     mData.muteInfo.time = time;
