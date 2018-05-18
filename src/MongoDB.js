@@ -193,7 +193,7 @@ class MongoDB {
   }
 
   async createMute(gid, uid) {
-    if (!this.id) throw new Error("Database Not Ready");
+    if (!this.db) throw new Error("Database Not Ready");
     const guild = this.bot.guilds.get(gid);
     if (!guild) throw new Error("Cannot Find Guild");
     const user = this.bot.users.get(uid);
