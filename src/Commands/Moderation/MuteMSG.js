@@ -10,7 +10,7 @@ const parsems = require("parse-duration");
 class MuteMsg extends Command {
   constructor() {
     super("mutemsg", {
-      aliases: ["mutemsg"],
+      aliases: ["mutemsg", "mutem"],
       split: "plain",
       args: [
         { id: "userTag", type: "memberMention" },
