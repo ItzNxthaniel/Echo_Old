@@ -7,10 +7,10 @@
 const { Command } = require("discord-akairo");
 const parsems = require("parse-duration");
 
-class Mute extends Command {
+class MuteMsg extends Command {
   constructor() {
-    super("mute", {
-      aliases: ["mute"],
+    super("mutemsg", {
+      aliases: ["mutemsg"],
       split: "plain",
       args: [
         { id: "userTag", type: "memberMention" },
@@ -68,4 +68,4 @@ class Mute extends Command {
   }
 }
 
-module.exports = Mute;
+module.exports = MuteMsg;
