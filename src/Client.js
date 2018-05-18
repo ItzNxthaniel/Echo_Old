@@ -101,8 +101,20 @@ const client = new AkairoClient({
       type: "PLAYING"
     },
     {
-      title: "my gears creak",
+      title: "my gears creak!",
       type: "LISTENING"
+    },
+    {
+      title: "with my database!",
+      type: "PLAYING"
+    },
+    {
+      title: "my database!",
+      type: "LISTENING"
+    },
+    {
+      title: "the database!",
+      type: "WATCHING"
     }
   ],
   helpMsgs: [
