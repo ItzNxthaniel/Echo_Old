@@ -25,96 +25,51 @@ const client = new AkairoClient({
   },
   playingS: [
     {
-      title: "with your feelings!",
-      type: "PLAYING"
-    },
-    {
-      title: "with dogs!",
-      type: "PLAYING"
-    },
-    {
-      title: "Simon Says!",
-      type: "PLAYING"
-    },
-    {
-      title: "I Spy!",
-      type: "PLAYING"
-    },
-    {
-      title: "with chess pieces!",
-      type: "PLAYING"
-    },
-    {
-      title: "with Goomig!",
-      type: "PLAYING"
-    },
-    {
-      title: "with a rubber duck!",
-      type: "PLAYING"
-    },
-    {
-      title: "your complaints!",
-      type: "LISTENING"
-    },
-    {
-      title: "your movements!",
-      type: "WATCHING"
-    },
-    {
-      title: "as Big Brother!",
-      type: "PLAYING"
-    },
-    {
-      title: "Stranger Things!",
-      type: "WATCHING"
-    },
-    {
-      title: "Crunchyroll!",
-      type: "WATCHING"
-    },
-    {
-      title: "Spotify!",
-      type: "LISTENING"
-    },
-    {
-      title: "your commands!",
-      type: "LISTENING"
-    },
-    {
-      title: "your demands!",
-      type: "LISTENING"
-    },
-    {
-      title: "FM Radio!",
-      type: "LISTENING"
-    },
-    {
-      title: "nervous users!",
-      type: "LISTENING"
-    },
-    {
-      title: "users nervously!",
-      type: "LISTENING"
-    },
-    {
-      title: "e$help || e:help",
-      type: "PLAYING"
-    },
-    {
-      title: "my gears creak!",
-      type: "LISTENING"
-    },
-    {
-      title: "with my database!",
-      type: "PLAYING"
-    },
-    {
-      title: "my database!",
-      type: "LISTENING"
-    },
-    {
-      title: "the database!",
-      type: "WATCHING"
+      title: "with your feelings!", type: "PLAYING"
+    }, {
+      title: "with dogs!", type: "PLAYING"
+    }, {
+      title: "Simon Says!", type: "PLAYING"
+    }, {
+      title: "I Spy!", type: "PLAYING"
+    }, {
+      title: "with chess pieces!", type: "PLAYING"
+    }, {
+      title: "with Goomig!", type: "PLAYING"
+    }, {
+      title: "with a rubber duck!", type: "PLAYING"
+    }, {
+      title: "your complaints!", type: "LISTENING"
+    }, {
+      title: "your movements!", type: "WATCHING"
+    }, {
+      title: "as Big Brother!", type: "PLAYING"
+    }, {
+      title: "Stranger Things!", type: "WATCHING"
+    }, {
+      title: "Crunchyroll!", type: "WATCHING"
+    }, {
+      title: "Spotify!", type: "LISTENING"
+    }, {
+      title: "your commands!", type: "LISTENING"
+    }, {
+      title: "your demands!", type: "LISTENING"
+    }, {
+      title: "FM Radio!", type: "LISTENING"
+    }, {
+      title: "nervous users!", type: "LISTENING"
+    }, {
+      title: "users nervously!", type: "LISTENING"
+    }, {
+      title: "e$help || e:help", type: "PLAYING"
+    }, {
+      title: "my gears creak!", type: "LISTENING"
+    }, {
+      title: "with my database!", type: "PLAYING"
+    }, {
+      title: "my database!", type: "LISTENING"
+    }, {
+      title: "the database!", type: "WATCHING"
     }
   ],
   helpMsgs: [
