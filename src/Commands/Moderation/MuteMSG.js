@@ -11,7 +11,6 @@ class MuteMsg extends Command {
   constructor() {
     super("mutemsg", {
       aliases: ["mutemsg", "mutem"],
-      split: "plain",
       args: [
         { id: "userTag", type: "memberMention" },
         { id: "time", type: "string" },
