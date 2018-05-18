@@ -226,6 +226,7 @@ class MongoDB {
     await this.guilds.deleteMany({ gid });
   }
   */
+
   async fetchGuild(gid) {
     if (!this.db) throw new Error("Database Not Ready");
     let data = await this.guilds.findOne({ gid });
