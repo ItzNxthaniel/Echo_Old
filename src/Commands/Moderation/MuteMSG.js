@@ -63,6 +63,7 @@ class MuteMsg extends Command {
     const mData = await this.client.mongo.fetchMute(member.user.id, m.guild.id);
     mData.muteInfo.time = time;
     mData.muteInfo.reason = reason;
+    mData.muteInfo.type = "MESSAGE";
     const cMutes = this.client.mongo.mutes;
     cMutes.update({ uid: member.user.id, gid: m.guild.id }, mData);
   }
