@@ -219,6 +219,11 @@ class MongoDB {
   }
 
   /*
+  async checkMuteList() {
+  }
+  */
+
+  /*
   async deleteGuild(gid) {
     if (!this.db) throw new Error("Database Not Ready");
     const guild = this.bot.guilds.get(gid);

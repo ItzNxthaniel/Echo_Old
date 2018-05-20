@@ -116,5 +116,9 @@ setInterval(() => {
   });
 }, 60000);
 
+setInterval(() => {
+  MongoDB.checkMuteList();
+}, 60000);
+
 client.mongo = new MongoDB(client);
 client.login(token);
