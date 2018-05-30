@@ -34,6 +34,7 @@ exports.mongo = {
     donations: "donations",
     afk: "afk",
     blacklist: "blacklist",
-    mutes: "mutes"
+    mutes: "mutes",
+    partners: "partners"
   }
 };

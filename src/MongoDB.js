@@ -117,6 +117,13 @@ class DefaultMute {
   }
 }
 
+class DefaultPartner {
+  constructor(gid, pid) {
+    this.gid = gid;
+    this.pid = pid;
+  }
+}
+
 class MongoDB {
   constructor(client) {
     this.bot = client;
@@ -185,12 +192,26 @@ class MongoDB {
     return this.collections.mutes.col;
   }
 
+  get partners() {
+    if (!this.collections.partners || Date.now() - this.collections.partners.age >= 900000) {
+      this.collections.partners = {
+        col: this.db.collection(mongo.collections.partners),
+        age: Date.now()
+      };
+    }
+    return this.collections.partners.col;
+  }
+
   mVerifyDataIntegrity(gid, uid, data) {
     return _.merge(new DefaultMute(uid, gid), data);
   }
 
   verifyDataIntegrity(gid, data) {
     return _.merge(new DefaultServer(gid), data);
+  }
+
+  pVerifyDataIntegrity(gid, pid, data) {
+    return _.merge(new DefaultPartner(gid, pid), data);
   }
 
   async createMute(gid, uid) {
@@ -215,6 +236,16 @@ class MongoDB {
     await this.guilds.insertOne(data);
     console.log(!guild ? `I"ve joined ${gid}.` : `I"ve ${(isMissing ? "added missing guild" : "joined")} ` +
     `${guild.name} (${guild.id}) owned by ${guild.owner.user.username} (${guild.owner.id}).`);
+    return data;
+  }
+
+  async createPartner(gid, pid) {
+    if (!this.db) throw new Error("Database Not Ready");
+    const guild = this.bot.guilds.get(gid);
+    if (!guild) throw new Error("Cannot Find Guild");
+    if (!this.partners) await this.db.createCollection(mongo.collections.partners);
+    const data = new DefaultPartner(gid, pid);
+    await this.partners.insertOne(data);
     return data;
   }
 
@@ -248,6 +279,15 @@ class MongoDB {
     if (!data) data = await this.createMute(gid, uid);
     delete data._id;
     data = this.mVerifyDataIntegrity(gid, uid, data);
+    return data;
+  }
+
+  async fetchPartner(gid, pid) {
+    if (!this.db) throw new Error("Database Not Ready");
+    let data = await this.partners.findOne({ gid, pid });
+    if (!data) data = await this.createMute(gid, pid);
+    delete data._id;
+    data = this.pVerifyDataIntegrity(gid, pid, data);
     return data;
   }
 }

@@ -86,7 +86,8 @@ const client = new AkairoClient({
     news: "420045140732805120",
     twitter: "420040434342166568",
     partner: "420043708210085901",
-    partner_news: "431210967595089926"
+    partner_news: "431210967595089926",
+    pManager: "451240502055141396"
   },
   disableEveryone: true
 });
@@ -108,6 +109,14 @@ client.error = function() {
   console.error.apply(console, args);
 };
 
+client.getRole = function(type, v, g) {
+  if (type == "id") {
+    return g.roles.get(v);
+  } else if (type == "name") {
+    return g.roles.find(r => r.name.toLowerCase() === v.toLowerCase());
+  }
+};
+
 setInterval(() => {
   const cS = client.options.playingS[Math.floor(Math.random() * client.options.playingS.length)];
 
@@ -116,9 +125,11 @@ setInterval(() => {
   });
 }, 60000);
 
+/*
 setInterval(() => {
   MongoDB.checkMuteList();
 }, 60000);
+*/
 
 client.mongo = new MongoDB(client);
 client.login(token);
