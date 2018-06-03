@@ -3,10 +3,24 @@ const { AkairoClient } = require("discord-akairo");
 const MongoDB = require("./MongoDB.js");
 const path = require("path");
 const { token } = require("./Data/Tokens.js");
+const prefix = "Ed$";
 
 const client = new AkairoClient({
   ownerID: "147891648628654082",
-  prefix: "e:",
+  prefix: async function(m) {
+    // Just in case somehow it's able to call before the DB even exists?
+    if (!client.mongo) return prefix;
+    try {
+      console.log("Fetching Prefix");
+      if (!m.guild) return prefix;
+      const data = await client.mongo.fetchGuild(m.guild.id);
+      if (data.settings.prefix == "default") return prefix;
+      else return data.settings.prefix;
+    } catch (e) {
+      console.error(`Error Fetching Prefix`, e);
+      return prefix;
+    }
+  },
   allowMention: true,
   emitters: { process },
   commandDirectory: path.join(__dirname, "Commands"),
