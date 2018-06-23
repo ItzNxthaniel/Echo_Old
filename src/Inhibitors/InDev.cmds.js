@@ -7,7 +7,7 @@ class InDevCmds extends Inhibitor {
     });
   }
   exec(m, c) {
-    if (c.options.inDevelopment && m.author.id != this.client.ownerID) return false;
+    if (c.options.inDevelopment && m.author.id != this.client.ownerID) return true;
   }
 }
 
