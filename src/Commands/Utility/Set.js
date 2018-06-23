@@ -10,8 +10,14 @@ class Set extends Command {
           id: "cSet",
           type: "lowercase"
         }
-      ]
+      ],
+      options: {
+        inDevelopment: true
+      }
     });
+  }
+  exec(m, args) {
+    return m.channel.send("Soon:tm:");
   }
 }
 
