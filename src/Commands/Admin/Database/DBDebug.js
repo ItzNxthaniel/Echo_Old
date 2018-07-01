@@ -13,6 +13,7 @@ class DBDebug extends Command {
     });
   }
   async exec(m) {
+    if (!m.member.permissions.has["ADMINISTRATOR"] && m.author.id != this.client.ownerID) return m.channel.send("You do not have valid permissions to run this command. You need the **Administrator** permission.");
     const settings = await this.client.mongo.fetchGuild(m.guild.id);
     if (!settings) return m.channel.send("I was unable to find the data for this guild.");
     let string = JSON.stringify(settings, null, 2);
