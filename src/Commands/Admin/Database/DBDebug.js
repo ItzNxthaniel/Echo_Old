@@ -9,8 +9,7 @@ const { Command } = require("discord-akairo");
 class DBDebug extends Command {
   constructor() {
     super("dbdebug", {
-      description: "Sends debug information about the current guild data.",
-      userPermissions: ["ADMINISTRATOR"]
+      description: "Sends debug information about the current guild data."
     });
   }
   async exec(m) {
