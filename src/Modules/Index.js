@@ -1,5 +1,6 @@
 module.exports = {
   ...require('discord.js'),
   ...require('discord-akairo'),
-  ...require('../Private/Tokens.js')
+  ...require('../Private/Tokens.js'),
+  ...require('mongodb'),
 };

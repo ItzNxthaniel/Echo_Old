@@ -65,6 +65,12 @@ const client = new AkairoClient({
   randomColor: parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`)
 });
 
+client.debug = function() {
+  const args = Array.prototype.slice.call(arguments);
+  args.unshift(`[Shard ${client.options.shardId}]`);
+  console.log.apply(console, args);
+};
+
 setInterval(() => {
   const cS = client.options.playingS[Math.floor(Math.random() * client.options.playingS.length)];
 
