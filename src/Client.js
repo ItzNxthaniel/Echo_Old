@@ -4,7 +4,7 @@
  * See the accompanying LICENSE file for terms.
  */
 
-import { token, AkairoClient } from './Modules/Packages.js';
+const { token, AkairoClient } = require('./Modules/Packages.js');
 
 const Client = new AkairoClient({
   // Akairo Client Settings
@@ -69,6 +69,7 @@ const Client = new AkairoClient({
     /* Fiery_Hacker */
     "Bringing in the reinforcements..."
   ],
+  randomColor: parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`)
 });
 
 setInterval(() => {
