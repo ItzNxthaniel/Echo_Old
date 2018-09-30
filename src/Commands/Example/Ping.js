@@ -4,7 +4,7 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { Command } = require('../../Modules/Packages');
+const { Command } = require('../../Modules/Index.js');
 
 module.exports = class extends Command {
   constructor() {

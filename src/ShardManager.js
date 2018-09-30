@@ -4,6 +4,6 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { ShardingManager, token } = require('./Modules/Packages.js');
+const { ShardingManager, token } = require('./Modules/Index.js');
 const sm = new ShardingManager('./Client.js', { token });
 sm.spawn();

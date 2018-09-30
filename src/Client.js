@@ -4,7 +4,9 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { token, AkairoClient } = require('./Modules/Packages.js');
+const { token, AkairoClient } = require('./Modules/Index.js');
+const path = require('path');
+const prefix = "e:";
 
 const Client = new AkairoClient({
   // Akairo Client Settings
@@ -30,6 +32,7 @@ const Client = new AkairoClient({
   },
   allowMention: true,
   emitters: { process },
+  commandDirectory: path.join(__dirname, "Commands"),
 }, {
   	// Discord Settings & Custom Settings
 	fetchAllMembers: true,
