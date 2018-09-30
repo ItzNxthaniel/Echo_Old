@@ -8,31 +8,21 @@ const { token, AkairoClient } = require('./Modules/Index.js');
 const path = require('path');
 const prefix = "e:";
 
-const Client = new AkairoClient({
-  // Akairo Client Settings
+const client = new AkairoClient({
+  // Akairo client Settings
   ownerIDs: [
     "147891648628654082", // Goom
     "295391820744228867", // Dwiggy
     "296862433136476160", // TheFloppyBanana
     "362315641161515008" // Vistril
   ],
-  prefix: async function(m) {
-    // Just in case somehow it's able to call before the DB even exists?
-    if (!Client.mongo) return prefix;
-    try {
-      console.log("Fetching Prefix");
-      if (!m.guild) return prefix;
-      const data = await Client.mongo.fetchGuild(m.guild.id);
-      if (data.settings.prefix == "default") return prefix;
-      else return data.settings.prefix;
-    } catch (e) {
-      console.error(`Error Fetching Prefix`, e);
-      return prefix;
-    }
-  },
+  // Custom Prefix Support
+  prefix: "e:",
   allowMention: true,
   emitters: { process },
   commandDirectory: path.join(__dirname, "Commands"),
+  listenerDirectory: path.join(__dirname, "Handlers/Listeners"),
+  inhibitorDirectory: path.join(__dirname, "Handlers/Inhibitors")
 }, {
   	// Discord Settings & Custom Settings
 	fetchAllMembers: true,
@@ -76,12 +66,28 @@ const Client = new AkairoClient({
 });
 
 setInterval(() => {
-  const cS = Client.options.playingS[Math.floor(Math.random() * Client.options.playingS.length)];
+  const cS = client.options.playingS[Math.floor(Math.random() * client.options.playingS.length)];
 
-  Client.user.setActivity(cS.title, {
+  client.user.setActivity(cS.title, {
     type: cS.type
   });
 }, 60000);
 
-// Client.mongo = new MongoDB(Client);
-Client.login(token);
+// client.mongo = new MongoDB(client);
+client.login(token);
+
+
+/*
+  if (!client.mongo) return prefix;
+    
+  try {
+    console.log("Fetching Prefix");
+    if (!m.guild) return prefix;
+    const data = await client.mongo.fetchGuild(m.guild.id);
+    if (data.settings.prefix == "default") return prefix;
+    else return data.settings.prefix;
+  } catch (e) {
+    console.error(`Error Fetching Prefix`, e);
+    return prefix;
+  }
+*/
