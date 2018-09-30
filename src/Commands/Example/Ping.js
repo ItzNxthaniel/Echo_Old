@@ -15,10 +15,10 @@ module.exports = class extends Command {
     m.channel.send("Pinging!").then(snt => {
       snt.edit("", { embed: {
 	      color: 0x92ee8f, title: "Ping",
-        fields: [
-		      { name: "Bot Ping:", value: `${Math.floor(Math.round(bot.ping))}ms`, inline: true },
-		      { name: "Message Ping", value: `${Math.floor(Math.round(snt.createdTimestamp - m.createdTimestamp))}ms`, inline: true }
-		    ]
+          fields: [
+		    { name: "Bot Ping:", value: `${Math.floor(Math.round(bot.ping))}ms`, inline: true },
+		    { name: "Message Ping", value: `${Math.floor(Math.round(snt.createdTimestamp - m.createdTimestamp))}ms`, inline: true }
+		  ]
 	    }});
 	  });
   };
