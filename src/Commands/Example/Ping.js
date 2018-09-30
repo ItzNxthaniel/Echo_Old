@@ -8,7 +8,10 @@ const { Command } = require('../../Modules/Packages');
 
 module.exports = class extends Command {
   constructor() {
-	super('ping');
+	  super("ping", {
+      aliases: ["ping"],
+      description: "Gets the current speed of the WebSocket and Message Ping"
+    });
   }
 
   async exec(m) {
