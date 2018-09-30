@@ -7,11 +7,12 @@
 /**
  * The main bot token
  * @type {string}
+ * @private
  */
 exports.token = "";
 
 /**
- * Google Options
+ * Google Api Options
  * @type {object}
  */
 exports.gOpts = {
