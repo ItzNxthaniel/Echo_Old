@@ -13,11 +13,27 @@ const Client = new AkairoClient({
     "295391820744228867", // Dwiggy
     "296862433136476160", // TheFloppyBanana
     "362315641161515008" // Vistril
-  ]
+  ],
+  prefix: async function(m) {
+    // Just in case somehow it's able to call before the DB even exists?
+    if (!client.mongo) return prefix;
+    try {
+      console.log("Fetching Prefix");
+      if (!m.guild) return prefix;
+      const data = await client.mongo.fetchGuild(m.guild.id);
+      if (data.settings.prefix == "default") return prefix;
+      else return data.settings.prefix;
+    } catch (e) {
+      console.error(`Error Fetching Prefix`, e);
+      return prefix;
+    }
+  },
+  allowMention: true,
+  emitters: { process },
 }, {
   	// Discord Settings & Custom Settings
 	fetchAllMembers: true,
-	disableEveryone: false,
+	disableEveryone: true,
 	playingS: [
 		{ title: "with your feelings!", type: "PLAYING" },
 		{ title: "with dogs!", type: "PLAYING" },
@@ -63,5 +79,5 @@ setInterval(() => {
   });
 }, 60000);
 
-Client.mongo = new MongoDB(Client);
+// Client.mongo = new MongoDB(Client);
 Client.login(token);
