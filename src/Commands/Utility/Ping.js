@@ -15,16 +15,15 @@ module.exports = class extends Command {
   }
 
   async exec(m) {
-    m.channel.send("Pinging!").then(snt => {
-      snt.edit("", { embed: {
-		  color: 0x92ee8f, title: "Ping",
-          fields: [
-		    { name: "Bot Ping:", value: `${await Math.floor(Math.round(bot.ping))}ms`, inline: true },
-		    { name: "Message Ping", value: `${await Math.floor(Math.round(snt.createdTimestamp - m.createdTimestamp))}ms`, inline: true }
-		  ]
-	    }});
-	  });
-  };
+    const snt = await m.channel.send("Pinging!");
+    return snt.edit({
+      embed: {
+        color: 0x92ee8f, title: "Ping",
+        fields: [
+          { name: "Bot Ping:", value: `${await Math.floor(Math.round(this.client.ping))}ms`, inline: true },
+          { name: "Message Ping:", value: `${await Math.floor(Math.round(snt.createdTimestamp - m.createdTimestamp))}ms`, inline: true }
+        ]
+      }
+    })
+  }
 };
-
-// want to make it use await? ~banan
