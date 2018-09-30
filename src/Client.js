@@ -18,11 +18,11 @@ const Client = new AkairoClient({
   ],
   prefix: async function(m) {
     // Just in case somehow it's able to call before the DB even exists?
-    if (!client.mongo) return prefix;
+    if (!Client.mongo) return prefix;
     try {
       console.log("Fetching Prefix");
       if (!m.guild) return prefix;
-      const data = await client.mongo.fetchGuild(m.guild.id);
+      const data = await Client.mongo.fetchGuild(m.guild.id);
       if (data.settings.prefix == "default") return prefix;
       else return data.settings.prefix;
     } catch (e) {
