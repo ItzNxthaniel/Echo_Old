@@ -1,6 +1,6 @@
 const { Inhibitor } = require("../../Modules/Index.js");
 
-modules.exports = class extends Inhibitor {
+module.exports = class extends Inhibitor {
   constructor() {
     super("indev", {
       reason: "indev"
