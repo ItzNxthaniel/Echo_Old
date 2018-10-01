@@ -4,21 +4,20 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { Listener } = require("discord-akairo");
+const { Listener } = require("../../../Modules/Index.js");
 const prettyms = require("pretty-ms")
 
-class CommandHandlerCooldown extends Listener {
+module.exports = class extends Listener {
   constructor() {
     super("commandHandlerCooldown", {
       emitter: "commandHandler",
       event: "cooldown"
     });
-  }
+  };
 
   exec(m, c, r) {
     const rT = prettyms(r);
     return m.channel.send(`You can use **${c.id}** again in \`${rT}\``);
-  }
-}
+  };
+};
 
-module.exports = CommandHandlerCooldown;

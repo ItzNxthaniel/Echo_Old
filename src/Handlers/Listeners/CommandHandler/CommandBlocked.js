@@ -1,6 +1,6 @@
-const { Listener } = require("discord-akairo");
+const { Listener } = require("../../../Modules/Index.js");
 
-class CommandHandlerCommandBlocked extends Listener {
+module.exports = class extends Listener {
   constructor() {
     super("commandHandlerCommandBlocked", {
       emitter: "commandHandler",
@@ -14,8 +14,6 @@ class CommandHandlerCommandBlocked extends Listener {
       });
     } else if (r == "indev") {
       return m.channel.send(`Sorry, the \`${c.id}\` is currently in development.`);
-    }
-  }
-}
-
-module.exports = CommandHandlerCommandBlocked;
+    };
+  };
+};

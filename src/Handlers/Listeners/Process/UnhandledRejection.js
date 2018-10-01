@@ -1,16 +1,14 @@
-const { Listener } = require("discord-akairo");
+const { Listener } = require("../../../Modules/Index.js");
 
-class ProcessUnhandledRejection extends Listener {
+module.exports = class extends Listener {
   constructor() {
     super("processUnhandledRejection", {
       emitter: "process",
       event: "unhandledRejection"
     });
-  }
+  };
 
   exec(e) {
     return console.error(e);
-  }
-}
-
-module.exports = ProcessUnhandledRejection;
+  };
+};

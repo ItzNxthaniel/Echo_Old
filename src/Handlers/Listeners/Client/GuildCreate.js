@@ -1,3 +1,4 @@
+/*
 const { Listener } = require("discord-akairo");
 
 class ClientGuildCreate extends Listener {
@@ -14,3 +15,4 @@ class ClientGuildCreate extends Listener {
 }
 
 module.exports = ClientGuildCreate;
+*/

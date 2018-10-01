@@ -10,7 +10,8 @@ module.exports = class extends Command {
   constructor() {
 	  super("ping", {
       aliases: ["ping"],
-      description: "Gets the current speed of the WebSocket and Message Ping"
+      description: "Gets the current speed of the WebSocket and Message Ping",
+      cooldown: 5000
     });
   }
 
