@@ -22,6 +22,14 @@ class Echo extends Client {
       typing: true,
       noPrefixDM: true,
       prefix: "e:",
+      providers: {
+        default: 'mongodb'
+      },
+      gateways: {
+        guilds: { provider: 'mongodb' },
+        users: { provider: 'mongodb' },
+        clientStorage: { provider: 'mongodb' }
+      },
 
       // Discord.js Options
       fetchAllMembers: true,
