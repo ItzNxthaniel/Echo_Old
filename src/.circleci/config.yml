@@ -1,0 +1,14 @@
+version: 1
+
+cache:
+  paths:
+    - node_modules/
+
+jobs:
+  build:
+    docker:
+      - image: node:latest
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx eslint . 
