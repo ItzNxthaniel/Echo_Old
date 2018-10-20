@@ -10,4 +10,4 @@ module.exports = class ClientGuildCreate extends Event {
     this.client.mongo.createGuild(guild.id);
   }
 
-}
+};

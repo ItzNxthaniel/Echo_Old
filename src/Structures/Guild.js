@@ -1,6 +1,7 @@
 const { Structures, Guild } = require('../Modules/Index');
 
-module.exports = Structures.extend("Guild", Guild => class EchoGuild extends Guild {
+module.exports = Structures.extend("Guild", () => class EchoGuild extends Guild {
+
   constructor(gid) {
     super("EchoGuild");
 
@@ -32,51 +33,51 @@ module.exports = Structures.extend("Guild", Guild => class EchoGuild extends Gui
     this.moderation = {
       spam_protect: false,
       swear_filter: {
-          enabled: false,
-          message: "",
-          action: {
-            warn: false,
-            mute: false,
-            kick: false,
-            ban: false
-          },
-          words: []
+        enabled: false,
+        message: "",
+        action: {
+          warn: false,
+          mute: false,
+          kick: false,
+          ban: false
+        },
+        words: []
       },
       bans: {
-          dmReason: false,
-          actOnSwear: {
-            enabled: false,
-            message: ""
-          },
-          delOMsg: false
+        dmReason: false,
+        actOnSwear: {
+          enabled: false,
+          message: ""
+        },
+        delOMsg: false
       },
       kicks: {
-          dmReason: false,
-          actOnSwear: {
-            enabled: false,
-            message: ""
-          },
-          delOMsg: false
+        dmReason: false,
+        actOnSwear: {
+          enabled: false,
+          message: ""
+        },
+        delOMsg: false
       },
       warns: {
-          dmReason: false,
-          amount2Mute: null,
-          amount2Kick: null,
-          amount2Ban: null,
-          actOnSwear: {
-            enabled: false,
-            message: ""
-          }
+        dmReason: false,
+        amount2Mute: null,
+        amount2Kick: null,
+        amount2Ban: null,
+        actOnSwear: {
+          enabled: false,
+          message: ""
+        }
       },
       mutes: {
-          dmReason: false,
-          mRoleID: "",
-          actOnSwear: {
-            enabled: false,
-            time: null,
-            reason: "",
-            message: ""
-          }
+        dmReason: false,
+        mRoleID: "",
+        actOnSwear: {
+          enabled: false,
+          time: null,
+          reason: "",
+          message: ""
+        }
       }
     };
 
@@ -99,6 +100,6 @@ module.exports = Structures.extend("Guild", Guild => class EchoGuild extends Gui
         member: ""
       }
     };
-  };
-});
+  }
 
+});

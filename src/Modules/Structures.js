@@ -1,10 +1,10 @@
 module.exports = {
-  EchoGuild: gid => {
+  EchoGuild: () => {
     const EGTemplate = {
       constructor(gid) {
         this.gid = gid;
       }
-    }
+    };
     return EGTemplate;
   }
-}
+};

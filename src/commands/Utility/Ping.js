@@ -7,6 +7,7 @@
 const { Command } = require('../../Modules/Index.js');
 
 module.exports = class extends Command {
+
   constructor(...args) {
     super(...args, {
       aliases: ["ping"],
@@ -28,4 +29,5 @@ module.exports = class extends Command {
       }
     });
   }
+
 };

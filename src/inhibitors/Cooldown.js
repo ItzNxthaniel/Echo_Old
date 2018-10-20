@@ -8,13 +8,14 @@ const { Inhibitor } = require("../Modules/Index.js");
 const prettyms = require("pretty-ms");
 
 module.exports = class extends Inhibitor {
+
   constructor(...args) {
     super(...args, { name: "cooldown" });
-  };
+  }
 
   async run(m, [c, r]) {
     const rT = prettyms(r);
     return m.channel.send(`You can use **${c.name}** again in \`${rT}\``);
-  };
-};
+  }
 
+};

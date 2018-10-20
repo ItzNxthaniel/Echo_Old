@@ -78,25 +78,24 @@ const options = {
   }
 };
 
-module.exports = class Echo extends Client {
-  constructor(...args) {
-    super(...args);
-  }
+class Echo extends Client {
 
   async debug() {
     const args = Array.prototype.slice.call(arguments);
     args.unshift(`[Shard ${Echo.options.shardId}]`);
     console.log.apply(console, args);
   }
+
 }
+
+module.exports = Echo;
 
 // client.mongo = new MongoDB(client);
 new Echo(options).login(token);
 
-
 /*
   if (!client.mongo) return prefix;
-    
+
   try {
     console.log("Fetching Prefix");
     if (!m.guild) return prefix;

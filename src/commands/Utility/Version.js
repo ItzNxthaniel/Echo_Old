@@ -7,13 +7,14 @@
 const { Command } = require('../../Modules/Index.js');
 
 module.exports = class extends Command {
+
   constructor(...args) {
     super(...args, {
       aliases: ["version", "v"],
       description: "Sends a detailed message of what version the bot is in, and what the code name is.",
       cooldown: 5
     });
-  };
+  }
 
   async run(m) {
     const snt = await m.send("FETCHING");
@@ -30,4 +31,5 @@ module.exports = class extends Command {
       }
     });
   }
+
 };
