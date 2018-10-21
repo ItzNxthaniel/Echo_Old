@@ -90,7 +90,7 @@ class Echo extends Client {
       .add('noLink', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
         .add('action', 'string', { default: '', configurable: true })
-        .add('warn', 'string', { default: '', configurable: false })
+        .add('warn', 'string', { default: '', configurable: true })
         .add('member', 'member', { configurable: false }))
       .add('music', music => music
         .add('volume', 'number', { default: 100, configurable: true })
