@@ -7,7 +7,7 @@ module.exports = class extends Inhibitor {
   }
 
   async run(m, [c]) {
-    if (c.name === "subscribe") return false;
+    if (c.name === "subscribe") return;
 
     const testers = [
       "147891648628654082", // Goom
@@ -20,8 +20,6 @@ module.exports = class extends Inhibitor {
       m.send("Sorry, you're not on the EchoV2 testing list, you can't run this command. Try again later. :clock:").catch();
       throw true;
     }
-
-    return undefined;
   }
 
 };
