@@ -69,7 +69,6 @@ const options = {
     /* Fiery_Hacker */
     "Bringing in the reinforcements..."
   ],
-  randomColor: parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`),
   inDevelopment: true,
   TestersOnly: false,
   Version: {
@@ -79,6 +78,69 @@ const options = {
 };
 
 class Echo extends Client {
+
+  constructor(...args) {
+    super(...args);
+
+    Echo.defaultGuildSchema
+      .add('partnered', 'boolean', { default: false, configurable: false })
+      .add('notifications', 'boolean', { default: false, configurable: false })
+      .add('preferEmbeds', 'boolean', { default: false, configurable: true })
+      .add('noInvite', 'boolean', { default: false, configurable: true })
+      .add('noLink', 'boolean', { default: false, configurable: true })
+      .add('logs', logs => logs
+        .add('action', 'string', { default: '', configurable: false })
+        .add('warn', 'string', { default: '', configurable: false })
+        .add('member', 'member', { configurable: false }))
+      .add('music', music => music
+        .add('volume', 'number', { default: 100, configurable: true })
+        .add('queue', 'string', { default: [], array: true, configurable: false })
+        .add('song_banlist', banlist => banlist
+          .add('enabled', 'boolean', { default: false, configurable: true })
+          .add('songs', 'string', { default: [], array: true, configurable: false })))
+      .add('moderation', moderation => moderation
+        .add('spam_protect', 'boolean', { default: false, configurable: true })
+        .add('swear_filter', filter => filter
+          .add('enabled', 'boolean', { default: false, configurable: true })
+          .add('message', 'string', { default: '', configurable: true })
+          .add('words', 'string', { default: [], array: true, configurable: true })
+          .add('action', action => action
+            .add('warn', 'boolean', { default: false, configurable: true })
+            .add('mute', 'boolean', { default: false, configurable: true })
+            .add('kick', 'boolean', { default: false, configurable: true })
+            .add('ban', 'boolean', { default: false, configurable: true })))
+        .add('bans', bans => bans
+          .add('dmReason', 'boolean', { default: false, configurable: true })
+          .add('delOMsg', 'boolean', { default: false, configurable: true })
+          .add('actOnSwear', act => act
+            .add('enabled', 'boolean', { default: false, configurable: true })
+            .add('message', 'string', { default: '', configurable: true })))
+        .add('kicks', kicks => kicks
+          .add('dmReason', 'boolean', { default: false, configurable: true })
+          .add('delOMsg', 'boolean', { default: false, configurable: true })
+          .add('actOnSwear', act => act
+            .add('enabled', 'boolean', { default: false, configurable: true })
+            .add('message', 'string', { default: '', configurable: true })))
+        .add('warns', warns => warns
+          .add('dmReason', 'boolean', { default: false, configurable: true })
+          .add('amount2Mute', 'any', { default: null, configurable: false })
+          .add('amount2Kick', 'any', { default: null, configurable: false })
+          .add('actOnSwear', act => act
+            .add('enabled', 'boolean', { default: false, configurable: true })
+            .add('message', 'string', { default: '', configurable: true })))
+        .add('mutes', mutes => mutes
+          .add('dmReason', 'boolean', { default: false, configurable: true })
+          .add('mRoleID', 'role', { default: '', configurable: true })
+          .add('actOnSwear', act => act
+            .add('enabled', 'boolean', { default: false, configurable: true })
+            .add('time', 'integer', { default: null, configurable: false })
+            .add('reason', 'string', { default: '', configurable: true })
+            .add('message', 'string', { default: '', configurable: true }))));
+  }
+
+  get randomColor() {
+    return parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`);
+  }
 
   async debug() {
     const args = Array.prototype.slice.call(arguments);
