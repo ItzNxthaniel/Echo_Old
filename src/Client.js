@@ -91,7 +91,7 @@ class Echo extends Client {
       .add('logs', logs => logs
         .add('action', 'string', { default: '', configurable: true })
         .add('warn', 'string', { default: '', configurable: true })
-        .add('member', 'member', { configurable: false }))
+        .add('member', 'member', { configurable: true }))
       .add('music', music => music
         .add('volume', 'number', { default: 100, configurable: true })
         .add('queue', 'string', { default: [], array: true, configurable: false })
