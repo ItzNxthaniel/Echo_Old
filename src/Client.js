@@ -152,20 +152,4 @@ class Echo extends Client {
 
 module.exports = Echo;
 
-// client.mongo = new MongoDB(client);
 new Echo(options).login(token);
-
-/*
-  if (!client.mongo) return prefix;
-
-  try {
-    console.log("Fetching Prefix");
-    if (!m.guild) return prefix;
-    const data = await client.mongo.fetchGuild(m.guild.id);
-    if (data.settings.prefix == "default") return prefix;
-    else return data.settings.prefix;
-  } catch (e) {
-    console.error(`Error Fetching Prefix`, e);
-    return prefix;
-  }
-*/
