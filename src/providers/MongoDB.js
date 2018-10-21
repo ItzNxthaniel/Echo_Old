@@ -16,7 +16,7 @@ module.exports = class extends Provider {
     const connection = mergeDefault({
       host: 'localhost',
       port: 27017,
-      db: 'klasa',
+      db: 'echo',
       options: {}
     }, this.client.options.providers.mongodb);
     const mongoClient = await Mongo.connect(`mongodb://${connection.host}:${connection.port}/`, mergeObjects(connection.options, {
