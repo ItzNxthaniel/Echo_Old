@@ -3,10 +3,10 @@ const { Inhibitor } = require("../Modules/Index.js");
 module.exports = class extends Inhibitor {
 
   constructor(...args) {
-    super(...args, { name: "testers" });
+    super(...args, { enabled: true, name: "testers" });
   }
 
-  async run(m, [c]) {
+  async run(m, c) {
     if (c.name === "subscribe") return;
 
     const testers = [
