@@ -1,10 +1,10 @@
-const { Command, KUtil } = require('../../Modules/Index.js');
-const { inspect } = require('util');
+const { Command, KUtil: { mergeObjects, codeBlock } } = require('../../Modules/Index.js');
 
 module.exports = class extends Command {
 
   constructor(...args) {
     super(...args, {
+      permissionLevel: 8,
       description: 'The base command for getting database information',
       usage: '<debug|reset>',
       subcommands: true
@@ -12,10 +12,11 @@ module.exports = class extends Command {
   }
 
   async debug(m) { // Can be ran by users with ADMIN perm, Bot Owners, and Server Owner!
-    m.send(KUtil.codeBlock('json', JSON.stringify(require('klasa').util.mergeObjects(await this.client.providers.default.get('guilds', msg.guild.id) || { id: msg.guild.id }, msg.guild.settings.toJSON()), null, 2)));
+    m.send(codeBlock('json', JSON.stringify(mergeObjects(await this.client.providers.default.get('guilds', m.guild.id) || { id: m.guild.id }, m.guild.settings.toJSON()), null, 2)));
   }
 
   async reset(m) { // Can only be ran by Server Owner and Bot Owner!
+    if (!await m.hasAtLeastPermissionLevel(9)) return;
     this.client.guilds.get(m.guild.id).settings.reset();
     m.send(`Guild **${m.guild.id}**'s database has been reset.`);
   }
