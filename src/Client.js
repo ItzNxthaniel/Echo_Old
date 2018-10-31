@@ -15,6 +15,7 @@ const options = {
     "296862433136476160", // TheFloppyBanana
     "362315641161515008" // Vistril
   ],
+  ownerID: "147891648628654082", // Goom 
   commandEditing: true,
   commandLogging: true,
   typing: true,
@@ -88,7 +89,12 @@ class Echo extends Client {
     super(...args);
 
     Echo.defaultGuildSchema
-      .add('partnered', 'boolean', { default: false, configurable: false })
+      // .add('automod', automod => automod
+        // .add())
+      .add('partner', partner => partner
+        .add('partnered', 'boolean', { default: true, configurable: false }))
+        .add('serverid', 'string', { default: "0", configurable: false })
+        .add('msgid', 'string', { default: '0', configurable: false })
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
       .add('noInvite', 'boolean', { default: false, configurable: true })
@@ -143,7 +149,9 @@ class Echo extends Client {
             .add('message', 'string', { default: '', configurable: true }))));
     
     Echo.defaultPermissionLevels
+      .add(8, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
       .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
+      .add(10, (client, msg) => options.ownerID === msg.author.id)
   }
 
   get randomColor() {

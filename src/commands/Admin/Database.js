@@ -11,11 +11,11 @@ module.exports = class extends Command {
     });
   }
 
-  async debug(m) {
-    m.send(KUtil.codeBlock('js', inspect(await this.client.providers.default.get('guilds', m.guild.id))));
+  async debug(m) { // Can be ran by users with ADMIN perm, Bot Owners, and Server Owner!
+    m.send(KUtil.codeBlock('json', JSON.stringify(require('klasa').util.mergeObjects(await this.client.providers.default.get('guilds', msg.guild.id) || { id: msg.guild.id }, msg.guild.settings.toJSON()), null, 2)));
   }
 
-  async reset(m) {
+  async reset(m) { // Can only be ran by Server Owner and Bot Owner!
     this.client.guilds.get(m.guild.id).settings.reset();
     m.send(`Guild **${m.guild.id}**'s database has been reset.`);
   }
