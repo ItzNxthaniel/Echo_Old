@@ -28,6 +28,11 @@ const options = {
     users: { provider: 'mongodb' },
     clientStorage: { provider: 'mongodb' }
   },
+  pieceDefaults: {
+    commands: {
+      cooldown: 1
+    }
+  },
 
   // Discord.js Options
   fetchAllMembers: true,
@@ -136,6 +141,9 @@ class Echo extends Client {
             .add('time', 'integer', { default: null, configurable: false })
             .add('reason', 'string', { default: '', configurable: true })
             .add('message', 'string', { default: '', configurable: true }))));
+    
+    Echo.defaultPermissionLevels
+      .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
   }
 
   get randomColor() {
