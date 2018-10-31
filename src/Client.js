@@ -89,23 +89,10 @@ class Echo extends Client {
     super(...args);
 
     Echo.defaultGuildSchema
-      .add('automod', automod => automod
-        .add('noInvite', 'boolean', { default: false, configurable: true })
-        .add('noLink', 'boolean', { default: false, configurable: true })
-        .add('spam_protect', 'boolean', { default: false, configurable: true })
-        .add('swear_filter', filter => filter
-          .add('enabled', 'boolean', { default: false, configurable: true })
-          .add('message', 'string', { default: '', configurable: true })
-          .add('words', 'string', { default: [], array: true, configurable: true })
-          .add('action', action => action
-            .add('warn', 'boolean', { default: false, configurable: true })
-            .add('mute', 'boolean', { default: false, configurable: true })
-            .add('kick', 'boolean', { default: false, configurable: true })
-            .add('ban', 'boolean', { default: false, configurable: true }))))
       .add('partner', partner => partner
-        .add('partnered', 'boolean', { default: true, configurable: false }))
+        .add('partnered', 'boolean', { default: true, configurable: false })
         .add('serverid', 'string', { default: "0", configurable: false })
-        .add('msgid', 'string', { default: '0', configurable: false })
+        .add('msgid', 'string', { default: '0', configurable: false }))
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
@@ -145,7 +132,20 @@ class Echo extends Client {
             .add('enabled', 'boolean', { default: false, configurable: true })
             .add('time', 'integer', { default: null, configurable: false })
             .add('reason', 'string', { default: '', configurable: true })
-            .add('message', 'string', { default: '', configurable: true }))));
+            .add('message', 'string', { default: '', configurable: true }))))
+      .add('automod', automod => automod
+        .add('noInvite', 'boolean', { default: false, configurable: true })
+        .add('noLink', 'boolean', { default: false, configurable: true })
+        .add('spam_protect', 'boolean', { default: false, configurable: true })
+        .add('swear_filter', filter => filter
+          .add('enabled', 'boolean', { default: false, configurable: true })
+          .add('message', 'string', { default: '', configurable: true })
+          .add('words', 'string', { default: [], array: true, configurable: true })
+          .add('action', action => action
+            .add('warn', 'boolean', { default: false, configurable: true })
+            .add('mute', 'boolean', { default: false, configurable: true })
+            .add('kick', 'boolean', { default: false, configurable: true })
+            .add('ban', 'boolean', { default: false, configurable: true }))));
 
     Echo.defaultPermissionLevels
       .add(8, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
