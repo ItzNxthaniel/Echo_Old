@@ -15,7 +15,7 @@ const options = {
     "296862433136476160", // TheFloppyBanana
     "362315641161515008" // Vistril
   ],
-  ownerID: "147891648628654082", // Goom 
+  ownerID: "147891648628654082", // Goom
   commandEditing: true,
   commandLogging: true,
   typing: true,
@@ -89,16 +89,25 @@ class Echo extends Client {
     super(...args);
 
     Echo.defaultGuildSchema
-      // .add('automod', automod => automod
-        // .add())
+      .add('automod', automod => automod
+        .add('noInvite', 'boolean', { default: false, configurable: true })
+        .add('noLink', 'boolean', { default: false, configurable: true })
+        .add('spam_protect', 'boolean', { default: false, configurable: true })
+        .add('swear_filter', filter => filter
+          .add('enabled', 'boolean', { default: false, configurable: true })
+          .add('message', 'string', { default: '', configurable: true })
+          .add('words', 'string', { default: [], array: true, configurable: true })
+          .add('action', action => action
+            .add('warn', 'boolean', { default: false, configurable: true })
+            .add('mute', 'boolean', { default: false, configurable: true })
+            .add('kick', 'boolean', { default: false, configurable: true })
+            .add('ban', 'boolean', { default: false, configurable: true }))))
       .add('partner', partner => partner
         .add('partnered', 'boolean', { default: true, configurable: false }))
         .add('serverid', 'string', { default: "0", configurable: false })
         .add('msgid', 'string', { default: '0', configurable: false })
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
-      .add('noInvite', 'boolean', { default: false, configurable: true })
-      .add('noLink', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
         .add('action', 'string', { default: '', configurable: true })
         .add('warn', 'string', { default: '', configurable: true })
@@ -110,16 +119,6 @@ class Echo extends Client {
           .add('enabled', 'boolean', { default: false, configurable: true })
           .add('songs', 'string', { default: [], array: true, configurable: false })))
       .add('moderation', moderation => moderation
-        .add('spam_protect', 'boolean', { default: false, configurable: true })
-        .add('swear_filter', filter => filter
-          .add('enabled', 'boolean', { default: false, configurable: true })
-          .add('message', 'string', { default: '', configurable: true })
-          .add('words', 'string', { default: [], array: true, configurable: true })
-          .add('action', action => action
-            .add('warn', 'boolean', { default: false, configurable: true })
-            .add('mute', 'boolean', { default: false, configurable: true })
-            .add('kick', 'boolean', { default: false, configurable: true })
-            .add('ban', 'boolean', { default: false, configurable: true })))
         .add('bans', bans => bans
           .add('dmReason', 'boolean', { default: false, configurable: true })
           .add('delOMsg', 'boolean', { default: false, configurable: true })
@@ -147,11 +146,11 @@ class Echo extends Client {
             .add('time', 'integer', { default: null, configurable: false })
             .add('reason', 'string', { default: '', configurable: true })
             .add('message', 'string', { default: '', configurable: true }))));
-    
+
     Echo.defaultPermissionLevels
       .add(8, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
       .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
-      .add(10, (client, msg) => options.ownerID === msg.author.id)
+      .add(10, (client, msg) => options.ownerID === msg.author.id);
   }
 
   get randomColor() {
