@@ -90,7 +90,7 @@ class Echo extends Client {
 
     Echo.defaultGuildSchema
       .add('partner', partner => partner
-        .add('partnered', 'boolean', { default: true, configurable: false })
+        .add('partnered', 'boolean', { default: false, configurable: false })
         .add('serverid', 'string', { default: "0", configurable: false })
         .add('msgid', 'string', { default: '0', configurable: false }))
       .add('notifications', 'boolean', { default: false, configurable: false })
