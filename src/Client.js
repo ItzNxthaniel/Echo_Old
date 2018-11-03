@@ -76,7 +76,13 @@ const options = {
     "Bringing in the reinforcements..."
   ],
   inDevelopment: true,
-  TestersOnly: false,
+  TestersOnly: true,
+  Testers: [
+    "147891648628654082", // Goom
+    "295391820744228867", // Dwiggy
+    "296862433136476160", // TheFloppyBanana
+    "362315641161515008" // Vistril
+  ],
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
     Name: "Raven"
