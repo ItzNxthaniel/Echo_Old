@@ -7,19 +7,19 @@ module.exports = class extends Command {
       aliases: ["advdb"],
       permissionLevel: 9,
       description: 'The base command for getting database information',
-      usage: '<debug|reset> [svrID]',
+      usage: '<debug|reset> [svr:guild]',
+      usageDelim: ' ',
       subcommands: true
     });
   }
 
-  async debug(m, [svrID]) { // Can be ran by users with ADMIN perm, Bot Owners, and Server Owner!
-    m.send(codeBlock('json', JSON.stringify(mergeObjects(await this.client.providers.default.get('guilds', m.guild.id) || { id: m.guild.id }, m.guild.settings.toJSON()), null, 2)));
+  async debug(m, [svr = m.guild]) {
+    m.send(codeBlock('json', JSON.stringify(mergeObjects(await this.client.providers.default.get('guilds', svr.id) || { id: svr.id }, svr.settings.toJSON()), null, 2)));
   }
 
-  async reset(m, [svrID]) { // Can only be ran by Server Owner and Bot Owner!
-    if (!await m.hasAtLeastPermissionLevel(9)) return;
-    this.client.guilds.get(m.guild.id).settings.reset();
-    m.send(`Guild **${m.guild.id}**'s database has been reset.`);
+  async reset(m, [svr = m.guild]) {
+    svr.settings.reset();
+    m.send(`**${svr.name}**'s database has been reset.`);
   }
 
 };

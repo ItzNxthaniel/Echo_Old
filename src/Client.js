@@ -81,7 +81,10 @@ const options = {
     "147891648628654082", // Goom
     "295391820744228867", // Dwiggy
     "296862433136476160", // TheFloppyBanana
-    "362315641161515008" // Vistril
+    "362315641161515008", // Vistril
+    "261236127581601793", // zjtech123
+    "184837412629774336", // Jason
+    "186508579035938816" // Hacker
   ],
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
@@ -98,7 +101,8 @@ class Echo extends Client {
       .add('partner', partner => partner
         .add('partnered', 'boolean', { default: false, configurable: false })
         .add('serverid', 'string', { default: "0", configurable: false })
-        .add('msgid', 'string', { default: '0', configurable: false }))
+        .add('msgid', 'string', { default: '0', configurable: false })
+        .add('ownerid', 'string', { default: "0", configurable: false }))
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
@@ -154,7 +158,8 @@ class Echo extends Client {
             .add('ban', 'boolean', { default: false, configurable: true }))));
 
     Echo.defaultPermissionLevels
-      .add(8, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
+      .add(7, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
+      .add(8, (client, msg) => msg.member && msg.author == m.guild.ownerID)
       .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
       .add(10, (client, msg) => options.ownerID === msg.author.id);
   }
