@@ -102,7 +102,12 @@ class Echo extends Client {
         .add('partnered', 'boolean', { default: false, configurable: false })
         .add('serverid', 'string', { default: "0", configurable: false })
         .add('msgid', 'string', { default: '0', configurable: false })
-        .add('ownerid', 'string', { default: "0", configurable: false }))
+        .add('ownerid', 'string', { default: "0", configurable: false })
+        .add('msginfo', msginfo => msginfo
+          .add('title', 'string', { default: "NaN", configurable: false })
+          .add('description', 'string', { default: "NaN", configurable: false }))
+          .add('thumbnail', 'string', { default: "NaN", configurable: false })
+          .add('link', 'string', { default: "NaN", configurable: false }))
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
@@ -159,7 +164,7 @@ class Echo extends Client {
 
     Echo.defaultPermissionLevels
       .add(7, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
-      .add(8, (client, msg) => msg.member && msg.author == m.guild.ownerID)
+      .add(8, (client, msg) => msg.member && msg.author === msg.guild.ownerID)
       .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
       .add(10, (client, msg) => options.ownerID === msg.author.id);
   }
