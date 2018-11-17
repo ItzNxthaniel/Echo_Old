@@ -1,4 +1,4 @@
-const { Provider, util: { mergeDefault, mergeObjects, isObject } } = require('klasa');
+const { Provider, util: { mergeObjects, isObject } } = require('klasa');
 
 const { MongoClient: Mongo } = require('mongodb');
 const { mongo } = require('../Private/Tokens.js');
@@ -10,7 +10,7 @@ function build() {
     mongo.host}:${
     mongo.port}/${
     mongo.database}`;
-};
+}
 
 module.exports = class extends Provider {
 
@@ -23,11 +23,10 @@ module.exports = class extends Provider {
   }
 
   async init() {
-    const mongoClient = await Mongo.connect(build(), {useNewUrlParser: true});
+    const mongoClient = await Mongo.connect(build(), { useNewUrlParser: true });
 
     this.db = mongoClient.db(mongo.db);
   }
-  
   /* Table methods */
 
   get exec() {

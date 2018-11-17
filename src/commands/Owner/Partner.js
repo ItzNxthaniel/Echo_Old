@@ -20,19 +20,21 @@ module.exports = class extends Command {
     });
   }
 
-  async add(m, [name, desc, id, oid, icon, inv]) {
+  async add(m, [/* name, desc, */id, oid/* icon, inv*/]) {
     if (m.channel.id !== "451241090301820948" && m.channel.id !== "451240344953028608") return m.channel.send("This command can only be ran in the #partner-commands channel.");
     if (!m.guild.members.get(oid)) return m.channel.send("That user is not in this server!");
     if (!this.client.guilds.get(id)) return m.channel.send("That server has not added Echo!");
     return null;
   }
 
-  async remove(m, [id]) {
+  async remove(m, /* [id] */) {
     if (m.channel.id !== "451241090301820948") return m.channel.send("This command can only be ran in the #partner-commands channel.");
+    return null;
   }
 
-  async update(m, [id, old, updated]) {
+  async update(m, /* [id, old, updated]*/) {
     if (m.channel.id !== "451241090301820948") return m.channel.send("This command can only be ran in the #partner-commands channel.");
+    return null;
   }
 
 };
