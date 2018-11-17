@@ -1,4 +1,4 @@
-# Build status
+# Build Status
 | Master Build Status  |
 | :---: |
 | [![CircleCI](https://circleci.com/gh/Goomig/Echo/tree/master.svg?style=svg&circle-token=d0964c1407a41df3319a9d21ec98690749eb9a17)](https://circleci.com/gh/Goomig/Echo/tree/master)|
