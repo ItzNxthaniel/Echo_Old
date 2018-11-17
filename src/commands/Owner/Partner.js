@@ -7,13 +7,15 @@
 const { Command } = require('../../Modules/Index.js');
 
 module.exports = class extends Command {
+
   constructor(...args) {
     super(...args, {
       name: 'partner',
       permissionLevel: 9,
       description: "The main partner command.",
       usage: '<add|remove|update> <Argument:string> [...]',
-      usageDelim: ' || ',
+      usageDelim: ' ',
+      quotedStringSupport: true,
       subcommands: true
     });
   }
@@ -32,4 +34,5 @@ module.exports = class extends Command {
   async update(m, [id, old, updated]) {
     if (m.channel.id !== "451241090301820948") return m.channel.send("This command can only be ran in the #partner-commands channel.");
   }
-}
+
+};
