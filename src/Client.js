@@ -81,10 +81,10 @@ const options = {
     "147891648628654082", // Goom
     "295391820744228867", // Dwiggy
     "296862433136476160", // TheFloppyBanana
-    "362315641161515008", // Vistril
     "261236127581601793", // zjtech123
     "184837412629774336", // Jason
-    "186508579035938816" // Hacker
+    "186508579035938816", // Hacker
+    "" // Plexi (Goom's Alt)
   ],
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
