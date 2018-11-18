@@ -23,7 +23,7 @@ module.exports = class extends Command {
         color: 0x92ee8f,
         title: "Ping",
         fields: [
-          { name: "Bot Ping:", value: `${await Math.floor(Math.round(this.client.ping))}ms`, inline: true },
+          { name: "Bot Ping:", value: `${await Math.floor(Math.round(this.client.ws.ping))}ms`, inline: true },
           { name: "Message Ping:", value: `${await Math.floor(Math.round(snt.createdTimestamp - m.createdTimestamp))}ms`, inline: true }
         ]
       }
