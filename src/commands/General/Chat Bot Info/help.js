@@ -38,7 +38,7 @@ module.exports = class extends Command {
 		}
 
 		return message.author.send(helpMessage, { split: { char: '\u200b' } })
-			.then(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_DM'); })
+			.then(() => { if (message.channel.type !== 'dm') message.channel.send(this.client.options.helpMsgs[Math.floor(Math.random() * this.client.options.helpMsgs.length)]); })
 			.catch(() => { if (message.channel.type !== 'dm') message.sendLocale('COMMAND_HELP_NODM'); });
 	}
 
