@@ -11,10 +11,10 @@ module.exports = class extends Command {
   constructor(...args) {
     super(...args, {
       name: 'partner',
-      description: "The main partner command.",
-      honly: true,
-      indev: true
+      description: "The main partner command."
     });
+    this.indev = true;
+    this.honly = true;
   }
 
   async run(m) {

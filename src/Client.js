@@ -75,7 +75,6 @@ const options = {
     /* Fiery_Hacker */
     "Bringing in the reinforcements..."
   ],
-  inDevelopment: true,
   TestersOnly: true,
   Testers: [
     "147891648628654082", // Goom
@@ -89,6 +88,9 @@ const options = {
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
     Name: "Raven"
+  },
+  Colors: {
+    randomColor: parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`)
   }
 };
 
@@ -99,10 +101,11 @@ class Echo extends Client {
 
     Echo.defaultGuildSchema
       .add('partner', partner => partner
-        .add('partnered', 'boolean', { default: false, configurable: false })
+        .add('status', 'boolean', { default: false, configurable: false })
         .add('serverid', 'string', { default: "0", configurable: false })
         .add('msgid', 'string', { default: '0', configurable: false })
         .add('ownerid', 'string', { default: "0", configurable: false })
+        .add('channelid', 'string', { default: '0', configurable: false })
         .add('msginfo', msginfo => msginfo
           .add('title', 'string', { default: "NaN", configurable: false })
           .add('description', 'string', { default: "NaN", configurable: false }))
@@ -167,10 +170,6 @@ class Echo extends Client {
       .add(8, (client, msg) => msg.member && msg.author === msg.guild.ownerID)
       .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
       .add(10, (client, msg) => options.ownerID === msg.author.id);
-  }
-
-  get randomColor() {
-    return parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`);
   }
 
   async debug() {

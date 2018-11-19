@@ -18,11 +18,11 @@ module.exports = class extends Command {
       usageDelim: " ",
       quotedStringSupport: true
     });
+    this.honly = true;
   }
 
   async run(m, /* [id, item, updated] */) {
-    if (m.channel.id !== "451241090301820948" && m.channel.id !== "451240344953028608" && m.guild.id !== "513557686067920940") return m.channel.send("<:bloboutage:396514815863947266> | This command can only be ran in the #partner-commands channel.");
-    return null;
+    return m;
   }
 
 };

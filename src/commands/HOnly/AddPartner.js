@@ -14,21 +14,62 @@ module.exports = class extends Command {
       aliases: ["ap", "addpartner", "apartner", "addp"],
       permissionLevel: 9,
       description: "Add a Partnership.",
-      usage: '[cid:string] [name:string] [desc:string] [id:string] [oid:string] [icon:string] [inv:string]',
+      usage: '[name:string] [desc:string] [svr:string] [owner:user] [icon:string] [inv:string] [chn:string]',
       usageDelim: ' ',
       quotedStringSupport: true
     });
+    this.honly = true;
   }
 
-  async run(m, [cid = "408786425950240781", name, desc, id, oid, icon/* , inv*/]) {
-    if (m.channel.id !== "451241090301820948" && m.channel.id !== "451240344953028608" && m.guild.id !== "513557686067920940") return m.channel.send("<:bloboutage:396514815863947266> | This command can only be ran in the #partner-commands channel.");
-    if (!name || !desc || !id || !oid || !icon) return m.channel.send("<:bloboutage:396514815863947266> | It seems like you're missing an argument!");
-    if (!m.guild.members.get(oid)) return m.channel.send("<:bloboutage:396514815863947266> | The supplied `OWNER_ID` was not matched with anybody in the server.");
-    if (!this.client.guilds.get(id)) return m.channel.send("<:bloboutage:396514815863947266> | The supplied `SERVER_ID` was not matched with any of Echo's servers.");
-    return this.client.guilds.get(cid).send("This is a partner test!");
+  async run(m, [name, desc, svr, owner, icon, inv, chn = "408786425950240781"]) {
+    if (!name || !desc || !svr || !owner || !icon) {
+      return m.channel.send("<:bloboutage:396514815863947266> | It seems like you're missing an argument! | The command should look like `<Server_Name> <Server_Description> <Server_ID> <Server_Owner_ID> <Server_Icon> [Server_Invite]` | ***Auto Delete in 5 Seconds!***").then(snt => {
+        setTimeout(() => {
+          m.delete();
+          snt.delete();
+        }, 5000);
+      });
+    }
+    if (inv === "N/A") inv = "EMPTY";
+    if (!m.guild.members.get(owner.id)) {
+      return m.channel.send("<:bloboutage:396514815863947266> | The supplied `OWNER_ID` was not matched with anybody in the server. | ***Auto Delete in 5 Seconds!***").then(snt => {
+        setTimeout(() => {
+          m.delete();
+          snt.delete();
+        }, 5000);
+      });
+    }
+    if (!this.client.guilds.get(svr)) {
+      return m.channel.send("<:bloboutage:396514815863947266> | The supplied `SERVER_ID` was not matched with any of Echo's servers. | ***Auto Delete in 5 Seconds!***").then(snt => {
+        setTimeout(() => {
+          m.delete();
+          snt.delete();
+        }, 5000);
+      });
+    }
+
+    this.client.channels.get(chn).send("<@&431210967595089926>", { embed: {
+      color: this.client.options.Colors.randomColor, title: name + " :: " + owner.tag, description: desc,
+      author: { name: inv === "EMPTY" ? "No Invite Provided" : "Click Here To Join", url: inv === "EMPTY" ? "" : inv },
+      thumbnail: { url: icon }
+    } }).then(snt => {
+      this.client.guilds.get(svr).settings.update([["partner.status", true], ["partner.serverid", svr], ["partner.msgid", snt.id], ["partner.ownerid", owner.id], ["partner.channelid", snt.channel.id], ["partner.thumbnail", icon], ["partner.link", inv === "EMPTY" ? "EMPTY" : inv], ["partner.msginfo.title", name], ["partner.msginfo.description", desc]]);
+    });
+
+    owner.send(`<a:apartyblob:469006617573064704> | Congrats! | Your server, \`${name}\`, was accepted to TearinDev's partnership program!`);
+    this.client.guilds.get("406966876367749131").members.get(owner.id).roles.add(["420043708210085901"]);
+    return m.channel.send("<:blobthumbsup:398843278235009024> | I've successfully add them to the partner list. | ***Auto Delete in 5 Seconds!***").then(snt => {
+      if (m.guild.id === "406966876367749131") {
+        setTimeout(() => {
+          m.delete();
+          snt.delete();
+        }, 5000);
+      }
+    });
   }
 
 };
+
 
 /*
   `[Channel_ID] <Server_Name> <Server_Description> <Server_ID> <Server_Owner_ID> <Server_Icon> [Server_Invite]`
