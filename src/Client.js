@@ -83,7 +83,7 @@ const options = {
     "261236127581601793", // zjtech123
     "184837412629774336", // Jason
     "186508579035938816", // Hacker
-    "" // Plexi (Goom's Alt)
+    "463937208517263360" // Plexi (Goom's Alt)
   ],
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
@@ -108,9 +108,9 @@ class Echo extends Client {
         .add('channelid', 'string', { default: '0', configurable: false })
         .add('msginfo', msginfo => msginfo
           .add('title', 'string', { default: "NaN", configurable: false })
-          .add('description', 'string', { default: "NaN", configurable: false }))
+          .add('description', 'string', { default: "NaN", configurable: false })
           .add('thumbnail', 'string', { default: "NaN", configurable: false })
-          .add('link', 'string', { default: "NaN", configurable: false }))
+          .add('link', 'string', { default: "NaN", configurable: false })))
       .add('notifications', 'boolean', { default: false, configurable: false })
       .add('preferEmbeds', 'boolean', { default: false, configurable: true })
       .add('logs', logs => logs
@@ -122,7 +122,12 @@ class Echo extends Client {
         .add('queue', 'string', { default: [], array: true, configurable: false })
         .add('song_banlist', banlist => banlist
           .add('enabled', 'boolean', { default: false, configurable: true })
-          .add('songs', 'string', { default: [], array: true, configurable: false })))
+          .add('songs', 'string', { default: [], array: true, configurable: false }))
+        .add('bound', bound => bound
+          .add('setOnJoin', 'boolean', { default: false, configurable: false })
+          .add('chnID', 'string', { default: '0', configurable: false })))
+      .add('roles', roles => roles
+        .add('dj', 'string', { default: '0', configurable: false }))
       .add('moderation', moderation => moderation
         .add('bans', bans => bans
           .add('dmReason', 'boolean', { default: false, configurable: true })
