@@ -13,13 +13,12 @@ module.exports = class extends Command {
       name: 'partner',
       description: "The main partner command."
     });
-    this.indev = true;
     this.honly = true;
   }
 
   async run(m) {
     if (m.guild.id !== "406966876367749131" && m.guild.id !== "513557686067920940") return m.channel.send("<:bloboutage:396514815863947266> | This is a Hub Only Command!");
-    return m.channel.send("Test - From Partner.js");
+    return m.channel.send("To apply for partnership, go to this website! <https://forms.tearindev.com/discord/td-partner>");
   }
 
 };
