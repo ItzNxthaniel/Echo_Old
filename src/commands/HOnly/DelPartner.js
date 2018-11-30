@@ -14,14 +14,29 @@ module.exports = class extends Command {
       aliases: ["dp", "delpartner", "dpartner", "delp", "rmpartner", "rpartner"],
       permissionLevel: 9,
       description: "Remove a Partnership.",
-      usage: "[id:string]",
-      usageDelim: " "
+      usage: "<id:guild>"
     });
     this.honly = true;
   }
 
-  async run(m, /* [id] */) {
-    return m;
+  async run(m, [guild]) {
+    if (!guild.settings.get('partner.status')) throw '<:bloboutage:396514815863947266> | The server is not partnered.';
+    m.guild.members.fetch(guild.settings.get('partner.ownerid'))
+      .then(owner => owner.roles.remove('420043708210085901'))
+      .catch(() => { throw '<:bloboutage:396514815863947266> | The owner is not in this server.'; });
+    guild.settings.reset([
+      'partner.status',
+      'partner.serverid',
+      'partner.msgid',
+      'partner.ownerid',
+      'partner.channelid',
+      'partner.msginfo.title',
+      'partner.msginfo.description',
+      'partner.msginfo.thumbnail',
+      'partner.msginfo.link'
+    ]).then(res => { if (res.errors.length) throw '<:bloboutage:396514815863947266> | Something went wrong.'; });
+    m.send(`<:blobthumbsup:398843278235009024> | Server \`${guild.id}\` has been removed from partners.`);
+    m.delete();
   }
 
 };
