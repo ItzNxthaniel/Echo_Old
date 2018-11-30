@@ -99,6 +99,11 @@ class Echo extends Client {
   constructor(...args) {
     super(...args);
 
+    Echo.defaultClientSchema
+      .add('restart', restart => restart
+        .add('channel', 'textchannel')
+        .add('timestamp', 'number'));
+
     Echo.defaultGuildSchema
       .add('partner', partner => partner
         .add('status', 'boolean', { default: false, configurable: false })
