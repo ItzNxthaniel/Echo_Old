@@ -16,9 +16,9 @@ const options = {
     "362315641161515008" // Vistril
   ],
   ownerID: "147891648628654082", // Goom
+  hubID: "406966876367749131",
   commandEditing: true,
   commandLogging: true,
-  typing: true,
   noPrefixDM: true,
   prefix: "e:",
   providers: {
