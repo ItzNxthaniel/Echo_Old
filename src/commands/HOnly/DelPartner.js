@@ -21,7 +21,7 @@ module.exports = class extends Command {
 
   async run(m, [guild]) {
     if (!guild.settings.get('partner.status')) throw '<:bloboutage:396514815863947266> | The server is not partnered.';
-    this.client.guilds.get(this.client.settings.hubID).members.fetch(guild.settings.get('partner.ownerid'))
+    this.client.guilds.get(this.client.options.hubID).members.fetch(guild.settings.get('partner.ownerid'))
       .then(owner => owner.roles.remove(['420043708210085901']))
       .catch(() => { throw '<:bloboutage:396514815863947266> | The owner is not in this server.'; });
 
