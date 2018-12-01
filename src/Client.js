@@ -4,7 +4,7 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { token, Client } = require('./Modules/Index.js');
+const { token, Client, Schema } = require('./Modules/Index.js');
 
 const options = {
   // KlasaClient Options
@@ -117,16 +117,16 @@ class Echo extends Client {
           .add('thumbnail', 'string', { default: "NaN", configurable: false })
           .add('link', 'string', { default: "NaN", configurable: false })))
       .add('notifications', 'boolean', { default: false, configurable: false })
-      .add('preferEmbeds', 'boolean', { default: false, configurable: true })
+      .add('preferEmbeds', 'boolean', { default: false })
       .add('logs', logs => logs
-        .add('action', 'string', { default: '', configurable: true })
-        .add('warn', 'string', { default: '', configurable: true })
+        .add('action', 'string', { default: '' })
+        .add('warn', 'string', { default: '' })
         .add('member', 'user', { configurable: true }))
       .add('music', music => music
-        .add('volume', 'number', { default: 100, configurable: true })
+        .add('volume', 'number', { default: 100 })
         .add('queue', 'string', { default: [], array: true, configurable: false })
         .add('song_banlist', banlist => banlist
-          .add('enabled', 'boolean', { default: false, configurable: true })
+          .add('enabled', 'boolean', { default: false })
           .add('songs', 'string', { default: [], array: true, configurable: false }))
         .add('bound', bound => bound
           .add('setOnJoin', 'boolean', { default: false, configurable: false })
@@ -135,45 +135,45 @@ class Echo extends Client {
         .add('dj', 'string', { default: '0', configurable: false }))
       .add('moderation', moderation => moderation
         .add('bans', bans => bans
-          .add('dmReason', 'boolean', { default: false, configurable: true })
-          .add('delOMsg', 'boolean', { default: false, configurable: true })
+          .add('dmReason', 'boolean', { default: false })
+          .add('delOMsg', 'boolean', { default: false })
           .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false, configurable: true })
-            .add('message', 'string', { default: '', configurable: true })))
+            .add('enabled', 'boolean', { default: false })
+            .add('message', 'string', { default: '' })))
         .add('kicks', kicks => kicks
-          .add('dmReason', 'boolean', { default: false, configurable: true })
-          .add('delOMsg', 'boolean', { default: false, configurable: true })
+          .add('dmReason', 'boolean', { default: false })
+          .add('delOMsg', 'boolean', { default: false })
           .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false, configurable: true })
-            .add('message', 'string', { default: '', configurable: true })))
+            .add('enabled', 'boolean', { default: false })
+            .add('message', 'string', { default: '' })))
         .add('warns', warns => warns
-          .add('dmReason', 'boolean', { default: false, configurable: true })
+          .add('dmReason', 'boolean', { default: false })
           .add('amount2Mute', 'any', { default: null, configurable: false })
           .add('amount2Kick', 'any', { default: null, configurable: false })
           .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false, configurable: true })
-            .add('message', 'string', { default: '', configurable: true })))
+            .add('enabled', 'boolean', { default: false })
+            .add('message', 'string', { default: '' })))
         .add('mutes', mutes => mutes
-          .add('dmReason', 'boolean', { default: false, configurable: true })
-          .add('mRoleID', 'role', { default: '', configurable: true })
+          .add('dmReason', 'boolean', { default: false })
+          .add('mRoleID', 'role', { default: '' })
           .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false, configurable: true })
+            .add('enabled', 'boolean', { default: false })
             .add('time', 'integer', { default: null, configurable: false })
-            .add('reason', 'string', { default: '', configurable: true })
-            .add('message', 'string', { default: '', configurable: true }))))
+            .add('reason', 'string', { default: '' })
+            .add('message', 'string', { default: '' }))))
       .add('automod', automod => automod
-        .add('noInvite', 'boolean', { default: false, configurable: true })
-        .add('noLink', 'boolean', { default: false, configurable: true })
-        .add('spam_protect', 'boolean', { default: false, configurable: true })
+        .add('noInvite', 'boolean', { default: false })
+        .add('noLink', 'boolean', { default: false })
+        .add('spam_protect', 'boolean', { default: false })
         .add('swear_filter', filter => filter
-          .add('enabled', 'boolean', { default: false, configurable: true })
-          .add('message', 'string', { default: '', configurable: true })
-          .add('words', 'string', { default: [], array: true, configurable: true })
+          .add('enabled', 'boolean', { default: false })
+          .add('message', 'string', { default: '' })
+          .add('words', 'string', { default: [], array: true })
           .add('action', action => action
-            .add('warn', 'boolean', { default: false, configurable: true })
-            .add('mute', 'boolean', { default: false, configurable: true })
-            .add('kick', 'boolean', { default: false, configurable: true })
-            .add('ban', 'boolean', { default: false, configurable: true }))));
+            .add('warn', 'boolean', { default: false })
+            .add('mute', 'boolean', { default: false })
+            .add('kick', 'boolean', { default: false })
+            .add('ban', 'boolean', { default: false }))));
 
     Echo.defaultPermissionLevels
       .add(7, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
@@ -189,6 +189,20 @@ class Echo extends Client {
   }
 
 }
+
+Echo.gateways.register('donations', {
+  provider: 'mongodb',
+  schema: new Schema()
+    .add('guildID', 'string', { default: "0", configurable: false })
+    .add('hasDonated', 'boolean', { default: false, configurable: false })
+    .add('paymentType', 'string', { default: "none", configurable: false })
+    .add('paymentPlan', 'string', { default: "none", configurable: false })
+    .add('planPurchasedDate', 'string', { default: "none", configurable: false })
+    .add('gifted', gifted => gifted
+      .add('wasGifted', 'boolean', { default: false, configurable: false })
+      .add('gifterUserID', 'string', { default: "0", configurable: false })
+      .add('giftMessage', 'string', { default: "No Message Provided.", configurable: false }))
+});
 
 module.exports = Echo;
 
