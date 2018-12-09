@@ -22,12 +22,12 @@ const options = {
   noPrefixDM: true,
   prefix: "e:",
   providers: {
-    default: 'mongodb'
+    default: 'rethinkdb'
   },
   gateways: {
-    guilds: { provider: 'mongodb' },
-    users: { provider: 'mongodb' },
-    clientStorage: { provider: 'mongodb' }
+    guilds: { provider: 'rethinkdb' },
+    users: { provider: 'rethinkdb' },
+    clientStorage: { provider: 'rethinkdb' }
   },
   pieceDefaults: {
     commands: {
@@ -190,8 +190,10 @@ class Echo extends Client {
 
 }
 
-Echo.gateways.register('donations', {
-  provider: 'mongodb',
+const EchoClient = new Echo(options);
+
+EchoClient.gateways.register('donations', {
+  provider: 'rethinkdb',
   schema: new Schema()
     .add('guildID', 'string', { default: "0", configurable: false })
     .add('hasDonated', 'boolean', { default: false, configurable: false })
@@ -206,4 +208,4 @@ Echo.gateways.register('donations', {
 
 module.exports = Echo;
 
-new Echo(options).login(token);
+EchoClient.login(token);

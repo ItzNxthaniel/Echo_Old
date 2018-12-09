@@ -1,5 +1,6 @@
 const klasa = require('klasa');
 const discord = require('discord.js');
+const rethink = require('rethinkdbdash');
 
 module.exports = {
 	...discord,
@@ -8,5 +9,6 @@ module.exports = {
 	kversion: klasa.version,
 	DUtil: discord.Util,
 	KUtil: klasa.util,
+	rethink,
 	...require('../Private/Tokens.js')
 };
