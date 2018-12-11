@@ -176,10 +176,10 @@ class Echo extends Client {
             .add('ban', 'boolean', { default: false }))));
 
     Echo.defaultPermissionLevels
-      .add(7, (client, msg) => msg.member && msg.member.permissions.has('ADMINISTRATOR'))
-      .add(8, (client, msg) => msg.member && msg.author === msg.guild.ownerID)
-      .add(9, (client, msg) => options.ownerIDs.includes(msg.author.id))
-      .add(10, (client, msg) => options.ownerID === msg.author.id);
+      .add(7, ({ member }) => member && member.permissions.has('ADMINISTRATOR'))
+      .add(8, ({ member, author, guild }) => member && author.id === guild.ownerID)
+      .add(9, ({ author }) => options.ownerIDs.includes(author.id))
+      .add(10, ({ author }) => options.ownerID === author.id);
   }
 
   async debug() {
