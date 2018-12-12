@@ -27,7 +27,7 @@ module.exports = class extends Event {
 	const { guild } = r.message;
 
 	if (guild.member(usr.id).roles.has(roles[r.emoji.name])) guild.member(usr.id).roles.remove(roles[r.emoji.name]);
-	if (!Object.values(roles).some(role => guild.member(usr.id).roles.has(role))) guild.member(usr.id).roles.remove(roles.main);
+	if (!Object.values(roles).some(role => role !== roles.main && guild.member(usr.id).roles.has(role))) guild.member(usr.id).roles.remove(roles.main);
   }
 
 };
