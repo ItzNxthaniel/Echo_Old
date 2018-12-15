@@ -36,7 +36,7 @@ const options = {
   },
 
   // Discord.js Options
-  fetchAllMembers: true,
+  fetchAllMembers: false,
   disableEveryone: true,
 
   // Custom Options
@@ -83,7 +83,8 @@ const options = {
     "261236127581601793", // zjtech123
     "184837412629774336", // Jason
     "186508579035938816", // Hacker
-    "463937208517263360" // Plexi (Goom's Alt)
+    "463937208517263360", // Plexi (Goom's Alt)
+    "394697144252235805" // Kevlar
   ],
   Version: {
     Number: "V2.0.0_PRE-ALPHA",
