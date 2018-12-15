@@ -7,7 +7,7 @@ module.exports = class extends Inhibitor {
   }
 
   async run(m) {
-    if (["subscribe", "ping", "help", "partner"].includes(m.command.name)) return;
+    if (["ping", "help", "partner"].includes(m.command.name)) return;
 
     if (this.client.options.TestersOnly && !this.client.options.Testers.includes(m.author.id)) {
       m.send("Sorry, you're not on the EchoV2 testing list, you can't run this command. Try again later. :clock:").catch();
