@@ -10,5 +10,6 @@ module.exports = {
 	DUtil: discord.Util,
 	KUtil: klasa.util,
 	rethink,
+	...require('trello'),
 	...require('../Private/Tokens.js')
 };
