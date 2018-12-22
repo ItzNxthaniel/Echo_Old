@@ -11,5 +11,6 @@ module.exports = {
 	KUtil: klasa.util,
 	rethink,
 	...require('trello'),
+	...require('discord.js-lavalink'),
 	...require('../Private/Tokens.js')
 };

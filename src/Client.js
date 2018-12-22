@@ -83,7 +83,6 @@ const options = {
     "261236127581601793", // zjtech123
     "184837412629774336", // Jason
     "186508579035938816", // Hacker
-    "463937208517263360", // Plexi (Goom's Alt)
     "394697144252235805" // Kevlar
   ],
   Version: {
@@ -106,19 +105,19 @@ class Echo extends Client {
         .add('timestamp', 'number'));
 
     Echo.defaultGuildSchema
+      .add('notifications', 'boolean', { default: false, configurable: false })
+      .add('preferEmbeds', 'boolean', { default: false })
       .add('partner', partner => partner
         .add('status', 'boolean', { default: false, configurable: false })
-        .add('serverid', 'string', { default: "0", configurable: false })
-        .add('msgid', 'string', { default: '0', configurable: false })
-        .add('ownerid', 'string', { default: "0", configurable: false })
-        .add('channelid', 'string', { default: '0', configurable: false })
+        .add('serverid', 'string', { default: '', configurable: false })
+        .add('msgid', 'string', { default: '', configurable: false })
+        .add('ownerid', 'string', { default: '', configurable: false })
+        .add('channelid', 'string', { default: '', configurable: false })
         .add('msginfo', msginfo => msginfo
           .add('title', 'string', { default: "NaN", configurable: false })
           .add('description', 'string', { default: "NaN", configurable: false })
           .add('thumbnail', 'string', { default: "NaN", configurable: false })
           .add('link', 'string', { default: "NaN", configurable: false })))
-      .add('notifications', 'boolean', { default: false, configurable: false })
-      .add('preferEmbeds', 'boolean', { default: false })
       .add('logs', logs => logs
         .add('action', 'string', { default: '' })
         .add('warn', 'string', { default: '' })
@@ -131,9 +130,9 @@ class Echo extends Client {
           .add('songs', 'string', { default: [], array: true, configurable: false }))
         .add('bound', bound => bound
           .add('setOnJoin', 'boolean', { default: false, configurable: false })
-          .add('chnID', 'string', { default: '0', configurable: false })))
+          .add('chnID', 'string', { default: '', configurable: false })))
       .add('roles', roles => roles
-        .add('dj', 'string', { default: '0', configurable: false }))
+        .add('dj', 'string', { default: '', configurable: false }))
       .add('moderation', moderation => moderation
         .add('bans', bans => bans
           .add('dmReason', 'boolean', { default: false })
@@ -174,7 +173,11 @@ class Echo extends Client {
             .add('warn', 'boolean', { default: false })
             .add('mute', 'boolean', { default: false })
             .add('kick', 'boolean', { default: false })
-            .add('ban', 'boolean', { default: false }))));
+            .add('ban', 'boolean', { default: false }))))
+      .add('reaction_roles', reaction_roles => reaction_roles
+        .add('enabled', 'boolean', { default: false })
+        .add('msgID', 'string', { default: '' })
+        .add('roles', roles => roles));
 
     Echo.defaultPermissionLevels
       .add(7, ({ member }) => member && member.permissions.has('ADMINISTRATOR'))
@@ -196,14 +199,14 @@ const EchoClient = new Echo(options);
 EchoClient.gateways.register('donations', {
   provider: 'rethinkdb',
   schema: new Schema()
-    .add('guildID', 'string', { default: "0", configurable: false })
+    .add('guildID', 'string', { default: '', configurable: false })
     .add('hasDonated', 'boolean', { default: false, configurable: false })
     .add('paymentType', 'string', { default: "none", configurable: false })
     .add('paymentPlan', 'string', { default: "none", configurable: false })
     .add('planPurchasedDate', 'string', { default: "none", configurable: false })
     .add('gifted', gifted => gifted
       .add('wasGifted', 'boolean', { default: false, configurable: false })
-      .add('gifterUserID', 'string', { default: "0", configurable: false })
+      .add('gifterUserID', 'string', { default: '', configurable: false })
       .add('giftMessage', 'string', { default: "No Message Provided.", configurable: false }))
 });
 
