@@ -4,7 +4,7 @@
  * See the accompanying LICENSE file for terms.
  */
 
-const { token, Client, Schema } = require('./Modules/Index.js');
+const { token, l_link, Client, Schema, PlayerManager } = require('./Modules/Index.js');
 
 const options = {
   // KlasaClient Options
@@ -12,8 +12,7 @@ const options = {
   ownerIDs: [
     "147891648628654082", // Goom
     "295391820744228867", // Dwiggy
-    "296862433136476160", // TheFloppyBanana
-    "362315641161515008" // Vistril
+    "296862433136476160" // TheFloppyBanana
   ],
   ownerID: "147891648628654082", // Goom
   hubID: "406966876367749131",
@@ -80,7 +79,6 @@ const options = {
     "147891648628654082", // Goom
     "295391820744228867", // Dwiggy
     "296862433136476160", // TheFloppyBanana
-    "261236127581601793", // zjtech123
     "184837412629774336", // Jason
     "186508579035938816", // Hacker
     "394697144252235805" // Kevlar
@@ -91,7 +89,9 @@ const options = {
   },
   Colors: {
     randomColor: parseInt(`0x${Math.floor(Math.random() * 16777215).toString(16)}`)
-  }
+  },
+
+  nodes: [{ host: l_link.host, port: l_link.port, password: l_link.password }]
 };
 
 class Echo extends Client {
@@ -192,6 +192,13 @@ class Echo extends Client {
     console.log.apply(console, args);
   }
 
+  async _initplayer() {
+    this.player = new PlayerManager(this, options.nodes, {
+			user: this.user.id,
+			shards: this.options.shardCount
+		});
+  }
+
 }
 
 const EchoClient = new Echo(options);
@@ -204,6 +211,7 @@ EchoClient.gateways.register('donations', {
     .add('paymentType', 'string', { default: "none", configurable: false })
     .add('paymentPlan', 'string', { default: "none", configurable: false })
     .add('planPurchasedDate', 'string', { default: "none", configurable: false })
+    .add('paymentAuthCode', 'string', { default: "none", configurable: false })
     .add('gifted', gifted => gifted
       .add('wasGifted', 'boolean', { default: false, configurable: false })
       .add('gifterUserID', 'string', { default: '', configurable: false })
