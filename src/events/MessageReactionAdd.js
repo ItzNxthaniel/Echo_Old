@@ -20,7 +20,7 @@ module.exports = class extends Event {
   }
 
   run(r, usr) {
-    if (r.message.guild.id !== this.client.options.hubID) return;
+    if (r.message.guild.id !== "406966876367749131") return;
     if (r.message.channel.id !== "406994802266079243") return;
     if (r.message.id !== "521832496997072932") return;
 

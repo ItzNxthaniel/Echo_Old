@@ -121,7 +121,10 @@ class Echo extends Client {
       .add('logs', logs => logs
         .add('action', 'string', { default: '' })
         .add('warn', 'string', { default: '' })
-        .add('member', 'user', { configurable: true }))
+        .add('member', member => member
+          .add('join', 'boolean', { default: false })
+          .add('leave', 'boolean', { default: false })
+          .add('chn_id', 'string', { default: '' })))
       .add('music', music => music
         .add('volume', 'number', { default: 100 })
         .add('queue', 'string', { default: [], array: true, configurable: false })
@@ -136,44 +139,29 @@ class Echo extends Client {
       .add('moderation', moderation => moderation
         .add('bans', bans => bans
           .add('dmReason', 'boolean', { default: false })
-          .add('delOMsg', 'boolean', { default: false })
-          .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false })
-            .add('message', 'string', { default: '' })))
+          .add('delOMsg', 'boolean', { default: false }))
         .add('kicks', kicks => kicks
           .add('dmReason', 'boolean', { default: false })
-          .add('delOMsg', 'boolean', { default: false })
-          .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false })
-            .add('message', 'string', { default: '' })))
+          .add('delOMsg', 'boolean', { default: false }))
         .add('warns', warns => warns
           .add('dmReason', 'boolean', { default: false })
           .add('amount2Mute', 'any', { default: null, configurable: false })
-          .add('amount2Kick', 'any', { default: null, configurable: false })
-          .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false })
-            .add('message', 'string', { default: '' })))
+          .add('amount2Kick', 'any', { default: null, configurable: false }))
         .add('mutes', mutes => mutes
           .add('dmReason', 'boolean', { default: false })
-          .add('mRoleID', 'role', { default: '' })
-          .add('actOnSwear', act => act
-            .add('enabled', 'boolean', { default: false })
-            .add('time', 'integer', { default: null, configurable: false })
-            .add('reason', 'string', { default: '' })
-            .add('message', 'string', { default: '' }))))
+          .add('mRoleID', 'role', { default: '' })))
       .add('automod', automod => automod
         .add('noInvite', 'boolean', { default: false })
         .add('noLink', 'boolean', { default: false })
         .add('spam_protect', 'boolean', { default: false })
+        .add('auto_role', auto_role => auto_role
+          .add('user', 'string', { default: '', configurable: false })
+          .add('user', 'string', { default: '', configurable: false }))
         .add('swear_filter', filter => filter
           .add('enabled', 'boolean', { default: false })
           .add('message', 'string', { default: '' })
           .add('words', 'string', { default: [], array: true })
-          .add('action', action => action
-            .add('warn', 'boolean', { default: false })
-            .add('mute', 'boolean', { default: false })
-            .add('kick', 'boolean', { default: false })
-            .add('ban', 'boolean', { default: false }))))
+          .add('action', 'string', { default: '', configurable: false })))
       .add('reaction_roles', reaction_roles => reaction_roles
         .add('enabled', 'boolean', { default: false })
         .add('msgID', 'string', { default: '' })
